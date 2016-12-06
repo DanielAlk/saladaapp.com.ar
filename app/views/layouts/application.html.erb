@@ -7,8 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= render 'layouts/navigation' %>
-	<%= yield %>
+	<div id="wrapper" class="in">
+		<%= render 'layouts/navigation' %>
+		<div id="page-wrapper">
+			<%= yield %>
+		</div>
+	</div>
 	<%# render 'layouts/footer' %>
 	<script>
 		$(function() {
