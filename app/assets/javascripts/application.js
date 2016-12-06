@@ -12,5 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.validate
+//= require jquery.validate.additional-methods
+//= require jquery.validate.localization/messages_es_AR
+//= require bootstrap-sprockets
+//= require tinymce-jquery
 //= require turbolinks
+//= require autonumeric
 //= require_tree .
