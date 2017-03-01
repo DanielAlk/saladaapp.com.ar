@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">Usuarios</h1>
+		<table class="table table-striped table-controls" width="100%">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Email</th>
+					<th>Rol</th>
+					<th></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @users.each do |user| %>
+					<tr>
+						<td><%= user.id %></td>
+						<td><%= user.name %></td>
+						<td><%= user.email %></td>
+						<td><%= user.role == 'seller' ? 'Vendedor' : 'Comprador' %></td>
+						<td>
+							<div class="btn-group btn-group-xs" role="group" aria-label="...">
+								<%= link_to '<i class="fa fa-eye" aria-hidden="true"></i>'.html_safe, user, class: 'btn btn-default' %>
+								<%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_user_path(user), class: 'btn btn-info' %>
+								<%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', disabled: true %>
+							</div>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<!--br-->
+		<%# link_to 'New User', new_user_path %>
+	</div>
+</div>

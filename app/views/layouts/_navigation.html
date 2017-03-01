@@ -226,13 +226,13 @@
           </div>
         </li>
         <li>
-        	<a href="<%= root_path %>" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+        	<a href="<%= root_path %>" class="<%= sidebar_link_class(:panel, :home) %>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
         </li>
-        <li>
+        <li class="<%= 'active' if controller_name.to_sym == :users %>">
         	<a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
-        	<ul class="nav nav-second-level collapse">
+        	<ul class="nav nav-second-level collapse <%= 'in' if controller_name.to_sym == :users %>">
         		<li>
-        			<a href="<%= root_path %>">Lista de usuarios</a>
+        			<a href="<%= users_path %>" class="<%= sidebar_link_class(:users, :index) %>">Lista de usuarios</a>
         		</li>
         	</ul>
         </li>

@@ -1,1 +1,14 @@
+.c-danger { color: $brand-danger; }
+
+.round-200 { width: 200px; height: 200px; border-radius: 50%; }
+
 .navbar-brand-text { font-size: 16px; vertical-align: bottom; }
+
+table.table-controls tbody>tr>td:last-child { text-align: right; }
+
+#page-wrapper form { @extend .form-horizontal }
+
+.notification { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px; position: absolute; top: 0; right: 0; z-index: 9999999999; margin: 10px;
+	&.notice { color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; }
+	&.alert { color: #a94442; background-color: #f2dede; border-color: #ebccd1; }
+}

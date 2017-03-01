@@ -1,0 +1,112 @@
+<% content_for :extra_js do %>
+  $('.new_user, .edit_user').validate();
+  $('.datepick').datepicker({
+    format: 'dd-mm-yyyy'
+  });
+<% end %>
+
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name, 'Nombre', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.text_field :name, class: 'form-control', placeholder: 'name', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.email_field :email, class: 'form-control', placeholder: 'email', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :gender, 'Género', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.select :gender, options_for_select(User.genders, @user.gender), {}, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <% @user.birthday = @user.birthday.to_date.strftime('%d-%m-%Y') %>
+    <%= f.label :birthday, 'Fecha de nacimiento', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <div class="input-group date datepick">
+        <%= f.text_field :birthday, class: 'form-control', placeholder: 'birthday' %>
+        <span class="input-group-addon">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :id_type, 'Tipo de documento', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.select :id_type, options_for_select(User.id_types, @user.id_type), {}, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :id_number, 'Número de documento', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.text_field :id_number, class: 'form-control', placeholder: 'id_number', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :locality, 'Localidad', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.text_field :locality, class: 'form-control', placeholder: 'locality', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :address, 'Dirección', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.text_field :address, class: 'form-control', placeholder: 'address', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :phone_number, 'Telefono', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.phone_field :phone_number, class: 'form-control', placeholder: 'phone_number', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :role, 'Rol', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.select :role, options_for_select(User.roles, @user.role), {}, class: 'form-control' %>
+    </div>
+  </div>
+  <% if false %>
+    <div class="form-group">
+      <%= f.label :image, class: 'control-label col-sm-3' %>
+      <div class="col-sm-9">
+        <%= f.text_field :image, class: 'form-control', placeholder: 'image' %>
+      </div>
+    </div>  
+    <div class="form-group">
+      <%= f.label :io_uid, class: 'control-label col-sm-3' %>
+      <div class="col-sm-9">
+        <%= f.text_field :io_uid, class: 'form-control', placeholder: 'io_uid' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :uid, class: 'control-label col-sm-3' %>
+      <div class="col-sm-9">
+        <%= f.text_field :uid, class: 'form-control', placeholder: 'uid' %>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <div class="col-sm-9 col-sm-offset-3">
+      <%= f.submit class: 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>

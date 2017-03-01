@@ -16,6 +16,7 @@
 //= require jquery.validate.additional-methods
 //= require jquery.validate.localization/messages_es_AR
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
 //= require tinymce-jquery
 //= require turbolinks
 //= require autonumeric
