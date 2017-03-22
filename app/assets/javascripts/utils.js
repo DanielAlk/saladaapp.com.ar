@@ -4,6 +4,59 @@ Utils.init = function() {
 	Utils.start_bs_admin();
 };
 
+Utils.mp = function(href, params) {
+	//PAYMENT CON INFO HECHO SIN MODO SAND_BOX PARA RPBAR NOTIFICATIONS
+	//$.post('/payments/notifications?topic=payment&id=2408127797', 'json').done(function(){console.log(arguments)})
+	var loader = Utils.loader();
+	var member_url = function(id) {
+		return href + '/' + id;
+	};
+	var delete_payment = function(id) {
+		loader.show();
+		$.ajax(member_url(id), { method: 'delete', dataType: 'json', timeout: 15000 })
+		.always(loader.hide);
+	};
+	var update_payment = function(id, data) {
+		loader.show();
+		$.ajax(member_url(id), { method: 'patch', dataType: 'json', timeout: 15000, data: { payment: data } })
+		.always(function(response) {
+			window.location.href = member_url(id);
+		});
+	};
+	var open_modal = function(response) {
+		loader.hide();
+		$MPC.openCheckout ({
+			url: response.init_point,
+			mode: 'modal',
+			onreturn: function(data) {
+				var payment_id = data.external_reference;
+				if (!data.collection_id) delete_payment(payment_id);
+				else update_payment(payment_id, data);
+			}
+		});
+	};
+	$.post(href, params, open_modal, 'json');
+};
+
+Utils.loader = function() {
+	var $loader = $('body>div.loader');
+	var show = function() {
+		$loader = $('<div>', { class: 'loader' }).hide();
+		$('body').addClass('overflow-hidden').append($loader);
+		setTimeout(function() {
+			$loader.fadeIn();
+		}, 100);
+	};
+	var hide = function() {
+		$loader.fadeOut(function() {
+			$('body').removeClass('overflow-hidden');
+			$loader.remove();
+		});
+	};
+	if (!$loader.length) show();
+	return { element: $loader, hide: hide, show: show };
+};
+
 Utils.start_bs_admin = function() {
 	//Loads the correct sidebar on window load, collapses the sidebar on window resize. Sets the min-height of #page-wrapper to window size
 	var bs = function() {

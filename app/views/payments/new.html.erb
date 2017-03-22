@@ -1,0 +1,40 @@
+<div class="panel panel-primary panel-app">
+	<div class="panel-heading">SaladaApp</div>
+  <div class="panel-body">
+  	<h3><%= @promotion.title %></h3>
+    <p><%= @promotion.description.html_safe %></p>
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th colspan="2">Detalles de la promoción</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">Duración</th>
+					<td>
+						<% case @promotion.duration_type.try(:to_sym) %>
+							<% when :days %>
+								<%= pluralize @promotion.duration, 'día', 'días' %>
+							<% when :months %>
+								<%= pluralize @promotion.duration, 'mes', 'meses' %>
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">Precio</th>
+					<td><%= @promotion.price.to_f.to_s(:currency, unit: '$', separator: '.', delimiter: ',') %></td>
+				</tr>
+			</tbody>
+		</table>
+  </div>
+  <div class="panel-footer">
+  	<button type="button" class="btn btn-primary btn-block" id="payBtn">Comprar</button>
+  </div>
+</div>
+<% content_for :extra_js do %>
+	$('#payBtn').click(function(e) {
+		e.preventDefault();
+		Utils.mp('<%= payments_path %>', { payment: { user_id: <%= @user.id %>, payable_id: <%= @promotion.id %>, payable_type: 'Promotion' } });
+	});
+<% end %>

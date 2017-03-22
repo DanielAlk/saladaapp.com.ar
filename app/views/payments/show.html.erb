@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @payment.user %>
+</p>
+
+<p>
+  <strong>Payable:</strong>
+  <%= @payment.payable %>
+</p>
+
+<p>
+  <strong>Transaction amount:</strong>
+  <%= @payment.transaction_amount %>
+</p>
+
+<p>
+  <strong>Mercadopago preference:</strong>
+  <%= @payment.mercadopago_preference %>
+</p>
+
+<p>
+  <strong>Payment info:</strong>
+  <%= @payment.payment_info %>
+</p>
+
+<p>
+  <strong>Init point:</strong>
+  <%= @payment.init_point %>
+</p>
+
+<p>
+  <strong>Collection:</strong>
+  <%= @payment.collection_id %>
+</p>
+
+<p>
+  <strong>Collection status:</strong>
+  <%= @payment.collection_status %>
+</p>
+
+<p>
+  <strong>Collection status detail:</strong>
+  <%= @payment.collection_status_detail %>
+</p>
+
+<p>
+  <strong>Preference:</strong>
+  <%= @payment.preference_id %>
+</p>
+
+<p>
+  <strong>Payment type:</strong>
+  <%= @payment.payment_type %>
+</p>
+
+<%= link_to 'Edit', edit_payment_path(@payment) %> |
+<%= link_to 'Back', payments_path %>

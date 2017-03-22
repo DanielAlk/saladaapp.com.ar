@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :payments
   root 'panel#home'
 
   resources :users
