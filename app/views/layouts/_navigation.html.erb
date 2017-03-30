@@ -238,6 +238,17 @@
 						</li>
 					</ul>
 				</li>
+				<li class="<%= sidebar_link_class(:categories) %>">
+					<a href="#"><i class="fa fa-table fa-fw"></i> Categorías<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level collapse <%= 'in' if controller_name.to_sym == :categories %>">
+						<li>
+							<%= link_to 'Agregar Categoría', new_category_path, class: sidebar_link_class(:categories, :new) %>
+						</li>
+						<li>
+							<a href="<%= categories_path %>" class="<%= sidebar_link_class(:categories, :index) %>">Lista de categorías</a>
+						</li>
+					</ul>
+				</li>
 				<li class="<%= sidebar_link_class(:shops) %>">
 					<a href="#"><i class="fa fa-table fa-fw"></i> Puestos<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level collapse <%= 'in' if controller_name.to_sym == :shops %>">
