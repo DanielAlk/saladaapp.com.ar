@@ -20,13 +20,13 @@
 						<td><%= user.email %></td>
 						<td><%= user.role == 'seller' ? 'Vendedor' : 'Comprador' %></td>
 						<td>
-<% if false %>
-							<div class="btn-group btn-group-xs" role="group" aria-label="...">
-								<%= link_to '<i class="fa fa-eye" aria-hidden="true"></i>'.html_safe, user, class: 'btn btn-default' %>
-								<%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_user_path(user), class: 'btn btn-info' %>
-								<%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', disabled: true %>
-<% end %>
-							</div>
+							<% if false %>
+								<div class="btn-group btn-group-xs" role="group" aria-label="...">
+									<%= link_to '<i class="fa fa-eye" aria-hidden="true"></i>'.html_safe, user, class: 'btn btn-default' %>
+									<%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_user_path(user), class: 'btn btn-info' %>
+									<%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger', disabled: true %>
+								</div>
+							<% end %>
 						</td>
 					</tr>
 				<% end %>
