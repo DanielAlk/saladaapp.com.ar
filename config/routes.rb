@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :payments
   root 'panel#home'
 
+  resources :shops
+  resources :payments
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,154 @@
+<% content_for :extra_js do %>
+  $('.new_shop, .edit_shop').validate();
+  changeHandler.call($('.select-control').get(0));
+<% end %>
+
+<script type="text/javascript">
+  console.log(JSON.parse('<%= escape_javascript @shop.to_json.html_safe %>'));
+  var changeHandler = function(e) {
+    var $select = $(this);
+    var val = Number($select.val());
+    var $targets = $('.' + $select.attr('id'));
+    $targets.hide().each(function() {
+      var $target = $(this);
+      var valuesToMatch = $target.data('control-val');
+      if (valuesToMatch.indexOf(val) > -1) $target.show();
+    });
+  };
+  $(document).on('change', '.select-control', changeHandler);
+  $(document).on('submit', '.new_shop, .edit_shop', function(e) {
+    e.preventDefault();
+    var form = this;
+    var $form = $(form);
+    var files = $('#imageFile').get(0).files;
+    var file = files[0];
+    if (files && file) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $('<input>', { type: 'hidden', name: 'shop[image]', value: e.target.result }).appendTo($form);
+        $('<input>', { type: 'hidden', name: 'shop[image_file_name]', value: file.name }).appendTo($form);
+        form.submit();
+      };
+      reader.readAsDataURL(file);
+    } else form.submit();
+  });
+</script>
+
+<%= form_for(@shop) do |f| %>
+  <% if @shop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
+
+      <ul>
+      <% @shop.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :user_id, 'Usuario', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.collection_select :user_id, User.all, :id, :name, {prompt: 'Seleccioná', selected: 1}, class: 'form-control', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :category_id, 'Categoría', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.collection_select :category_id, Category.all, :id, :title, {prompt: 'Seleccioná'}, class: 'form-control', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, 'Descripción', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.text_field :description, class: 'form-control', placeholder: 'Descripción', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :shed_id, 'Galpón', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.collection_select :shed_id, Shed.all, :id, :title, {prompt: 'Seleccioná'}, class: 'form-control select-control', required: true %>
+    </div>
+  </div>
+  <div class="form-group shop_shed_id" data-control-val="[6]">
+    <%= f.label :gallery_name, 'Galería', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.select :gallery_name, [ 'Factory', 'Arbol', 'Colores', 'Valencia', 'Quinincha', 'María Concepción' ], { include_blank: 'Seleccioná' }, class: 'form-control', required: true %>
+    </div>
+  </div>
+  <div class="form-group shop_shed_id" data-control-val="[1]">
+    <%= f.label :location, 'Ubicación', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.select :location, [ ['Pasillo', :aisle], ['Lateral', :side] ], { include_blank: 'Seleccioná' }, class: 'form-control', required: true %>
+    </div>
+  </div>
+  <div class="form-group shop_shed_id" data-control-val="[1,2,3]">
+    <%= f.label :location_detail, 'Nº Ubicación', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.text_field :location_detail, class: 'form-control', placeholder: 'Nº Ubicación', required: true %>
+    </div>
+  </div>
+  <div class="form-group shop_shed_id" data-control-val="[2,4]">
+    <%= f.label :location_floor, 'Piso', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.select :location_floor, [ ['Planta Baja', 0], ['Primer Piso', 1] ], { include_blank: 'Seleccioná' }, class: 'form-control', required: true %>
+    </div>
+  </div>
+  <div class="form-group shop_shed_id" data-control-val="[1]">
+    <%= f.label :location_row, 'Fila', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.number_field :location_row, class: 'form-control', placeholder: 'Fila', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :number_id, 'Nº Puesto', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.number_field :number_id, class: 'form-control', placeholder: 'Nº Puesto', required: true %>
+    </div>
+  </div>
+  <div class="form-group shop_shed_id" data-control-val="[1]">
+    <%= f.label :letter_id, 'Letra puesto', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.text_field :letter_id, class: 'form-control', placeholder: 'Nº Letra', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :fixed, '¿Puesto fijo?', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.select :fixed, [[ 'Sí', true ], [ 'No', false ]], { include_blank: '¿Es puesto fijo?' }, class: 'form-control', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :opens, 'Abierto', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.select :opens, [
+        ['Todas las ferias', '2/4/7'],
+        ['Lunes solamente', '2'],
+        ['Miércoles solamente', '4'],
+        ['Sábados solamente', '7'],
+        ['Lunes y Miércoles', '2/4'],
+        ['Miércoles y Sábados', '4/7'],
+        ['Lunes y Sábados', '2/7'],
+        ['No opera', '0'],
+      ], { include_blank: '¿Qué días está abierto?' }, class: 'form-control', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :condition, 'Estado', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <%= f.select :condition, [ ['Ocupado', :occupied], ['Vacío', :empty], ['En reparación', :repairs] ], { include_blank: 'Estado del puesto' }, class: 'form-control', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :image, 'Imágen', class: 'control-label col-sm-3' %>
+    <div class="col-sm-9">
+      <input type="file" id="imageFile" accept="image/*">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-9 col-sm-offset-3">
+      <%= f.submit class: 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>

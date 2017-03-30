@@ -1,0 +1,2 @@
+json.extract! shop, :id, :user_id, :shed_id, :category_id, :description, :location, :location_detail, :location_floor, :location_row, :gallery_name, :number_id, :letter_id, :fixed, :opens, :condition, :status, :rating, :image, :created_at, :updated_at
+json.url shop_url(shop, format: :json)

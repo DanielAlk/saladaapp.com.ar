@@ -11,6 +11,7 @@
 			<span class="navbar-brand-text">SaladaApp</span>
 		</a>
 	</div>
+	<% if false %>
 	<ul class="nav navbar-top-links navbar-right">
 		<li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -212,10 +213,11 @@
 			</ul>
 		</li>
 	</ul>
+	<% end %>
 	<div class="navbar-default sidebar" role="navigation">
 		<div class="sidebar-nav navbar-collapse" aria-expanded="false" style="height: 1px;">
 			<ul class="nav in" id="side-menu">
-				<li class="sidebar-search">
+				<!--li class="sidebar-search">
 					<div class="input-group custom-search-form">
 						<input type="text" class="form-control" placeholder="Search...">
 						<span class="input-group-btn">
@@ -224,11 +226,11 @@
 							</button>
 						</span>
 					</div>
-				</li>
+				</li-->
 				<li>
-					<a href="<%= root_path %>" class="<%= sidebar_link_class(:panel, :home) %>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+					<a href="<%= root_path %>" class="<%= sidebar_link_class(:panel, :home) %>"><i class="fa fa-dashboard fa-fw"></i> Panel</a>
 				</li>
-				<li class="<%= 'active' if controller_name.to_sym == :users %>">
+				<li class="<%= sidebar_link_class(:users) %>">
 					<a href="#"><i class="fa fa-users fa-fw"></i> Usuarios<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level collapse <%= 'in' if controller_name.to_sym == :users %>">
 						<li>
@@ -236,10 +238,18 @@
 						</li>
 					</ul>
 				</li>
-				<li>
-					<a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+				<li class="<%= sidebar_link_class(:shops) %>">
+					<a href="#"><i class="fa fa-table fa-fw"></i> Puestos<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level collapse <%= 'in' if controller_name.to_sym == :shops %>">
+						<li>
+							<%= link_to 'Agregar Puesto', new_shop_path, class: sidebar_link_class(:shops, :new) %>
+						</li>
+						<li>
+							<a href="<%= shops_path %>" class="<%= sidebar_link_class(:shops, :index) %>">Lista de puestos</a>
+						</li>
+					</ul>
 				</li>
-				<li>
+				<!--li>
 					<a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
 				</li>
 				<li>
@@ -303,7 +313,7 @@
 							<a href="login.html">Login Page</a>
 						</li>
 					</ul>
-				</li>
+				</li-->
 			</ul>
 		</div>
 	</div>

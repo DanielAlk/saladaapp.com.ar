@@ -1,0 +1,55 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">
+			Datos de Puesto
+			<%= link_to 'Agregar puesto', new_shop_path, class: 'btn btn-primary pull-right' %>
+		</h1>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_shop_path(@shop), class: 'btn btn-xs btn-info' %>
+				<%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, @shop, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %>
+				<strong>Puesto Nº <%= @shop.number_id %> <small><%= @shop.description %></small></strong>
+			</div>
+			<div class="panel-body">
+				<div class="pull-right">
+					<%= image_tag @shop.cover.thumb, class: 'square-200' %>
+				</div>
+				<p><strong>Usuario:</strong> <%= link_to @user.name, @user %></p>
+				<p><strong>Email:</strong> <%= @user.email %></p>
+				<p><strong>Categoría:</strong> <%= @category.title %></p>
+				<p><strong>Descripción:</strong> <%= @shop.description %></p>
+				<p><strong>Galpón:</strong> <%= @shed.title %></p>
+				
+				<% if [6].include?(@shed.id) %>
+					<p><strong>Galería:</strong> <%= @shop.gallery_name %></p>
+				<% end %>
+
+				<p><strong>Puesto Nº</strong> <%= @shop.number_id %></p>
+
+				<% if [1].include?(@shed.id) %>
+					<p><strong>Ubicación:</strong> <%= { aisle: 'Pasillo', side: 'Lateral' }[@shop.location.try(:to_sym)] %></p>
+				<% end %>
+				
+				<% if [1,2,3].include?(@shed.id) %>
+					<p><strong>Nº Ubicación:</strong> <%= @shop.location_detail %></p>
+				<% end %>
+				
+				<% if [2,4].include?(@shed.id) %>
+					<p><strong>Piso:</strong> <%= ['Planta Baja', 'Primer Piso'][@shop.location_floor.try(:to_i)] rescue nil %></p>
+				<% end %>
+				
+				<% if [1].include?(@shed.id) %>
+					<p><strong>Fila:</strong> <%= @shop.location_row %></p>
+				<% end %>
+				
+				<% if [1].include?(@shed.id) %>
+					<p><strong>Letra Puesto</strong> <%= @shop.letter_id %></p>
+				<% end %>
+				
+				<p><strong>¿Puesto fijo?</strong> <%= @shop.fixed ? 'Si' : 'No' %></p>
+				<p><strong>Abierto</strong> <%= { '2/4/7' => 'Todas las ferias', '2' => 'Lunes solamente', '4' => 'Miércoles solamente', '7' => 'Sábados solamente', '2/4' => 'Lunes y Miércoles', '4/7' => 'Miércoles y Sábados', '2/7' => 'Lunes y Sábados', '0' => 'No opera' }[@shop.opens] %></p>
+				<p><strong>Estádo</strong> <%= { occupied: 'Ocupado', empty: 'Vacío', repairs: 'En reparación' }[@shop.condition.try(:to_sym)] %></p>
+			</div>
+		</div>
+	</div>
+</div>
