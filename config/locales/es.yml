@@ -27,3 +27,4 @@ es:
       previous: "<"
       next: ">"
       last: ">>"
+      truncate: "…"
