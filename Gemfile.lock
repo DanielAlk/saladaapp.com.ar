@@ -34,6 +34,8 @@ GEM
       activemodel (~> 4.0)
       activesupport (~> 4.0)
       rails-observers (~> 0.1.2)
+    activeresource-response (1.1.1)
+      activeresource (>= 3, < 5)
     activesupport (4.2.6)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -80,6 +82,18 @@ GEM
       railties (>= 3.2, < 5.0)
       thor (~> 0.14)
     json (1.8.3)
+    kaminari (1.0.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.0.1)
+      kaminari-activerecord (= 1.0.1)
+      kaminari-core (= 1.0.1)
+    kaminari-actionview (1.0.1)
+      actionview
+      kaminari-core (= 1.0.1)
+    kaminari-activerecord (1.0.1)
+      activerecord
+      kaminari-core (= 1.0.1)
+    kaminari-core (1.0.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -167,6 +181,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeresource
+  activeresource-response
   autonumeric-rails
   bootstrap-datepicker-rails
   bootstrap-sass (= 3.2.0.0)
@@ -177,6 +192,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-validation-rails
+  kaminari
   rails (= 4.2.6)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

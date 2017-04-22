@@ -4,7 +4,21 @@ class ShopsController < ApplicationController
   # GET /shops
   # GET /shops.json
   def index
-    @shops = Shop.all
+    resource_params = {}
+    resource_params[:f] = params[:f].to_json if params[:f].present?
+    resource_params[:page] = params[:page].present? ? params[:page] : 1
+
+    @shops = Shop.all(params: resource_params)
+
+    @shops = Kaminari::PaginatableArray.new(@shops,{
+      limit: @shops.http_response['X-limit'].to_i,
+      offset: @shops.http_response['X-offset'].to_i,
+      total_count: @shops.http_response['X-total'].to_i
+    })
+
+    @categories = Category.all
+    @sheds = Shed.all
+    @users = User.all(params: { f: { scopes: { role: :seller } } })
   end
 
   # GET /shops/1

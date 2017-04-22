@@ -21,3 +21,9 @@
 
 es:
   hola: "Hola mundo"
+  views:
+    pagination:
+      first: "<<"
+      previous: "<"
+      next: ">"
+      last: ">>"

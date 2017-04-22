@@ -32,11 +32,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'activeresource'
+gem "activeresource-response"
 
 gem 'figaro'
 gem 'sucker_punch'
 gem 'autonumeric-rails'
 gem 'tinymce-rails'
+gem 'kaminari'
 
 gem 'bootstrap-sass', '3.2.0.0'
 gem 'font-awesome-sass'
