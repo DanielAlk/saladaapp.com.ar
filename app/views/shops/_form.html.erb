@@ -22,6 +22,7 @@
     var $form = $(form);
     var files = $('#imageFile').get(0).files;
     var file = files[0];
+    Utils.loader();
     if (files && file) {
       var reader = new FileReader();
       reader.onload = function(e) {
