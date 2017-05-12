@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
-  resources :categories
-  root 'panel#home'
 
-  resources :shops
-  resources :payments
-  resources :users
+  constraints subdomain: /panel/ do
+    get '/', to: 'panel#home', as: :panel
+    resources :categories
+    resources :shops
+    resources :payments
+    resources :users
+  end
 
+  root 'pages#home'
+  get 'packs/:role', to: 'pages#packs', role: /visitante|comerciante/, as: :packs
+  get 'blog', to: 'pages#blog', as: :blog
+  get 'article', to: 'pages#article', as: :article
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

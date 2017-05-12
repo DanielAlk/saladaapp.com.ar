@@ -1,0 +1,183 @@
+<% content_for :extra_js do %>
+	Utils.radios();
+<% end %>
+
+<div class="pages-cover-home relative cover h-xs-700 pt-xs-70">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-6">
+				<div class="pages-cover-home-caption">
+					<%= image_tag 'saladaapp_pages_logo.png' %>
+					<h1 class="pages-cover-caption-title">Todo lo que buscás en un lugar y al alcance de tu mano</h1>
+					<p class="pages-cover-caption-text">LLegó <b>Salada</b>App, una App para recorrer la feria mas grande de latinoamérica</p>
+					<div class="app-try-button">
+						<%= link_to 'Probala grátis ahora', '#download', class: 'scroll-hash' %>
+						<%= link_to '#' do %>
+							<i class="fa fa-apple" aria-hidden="true"></i>
+						<% end %>
+						<%= link_to '#' do %>
+							<i class="fa fa-android" aria-hidden="true"></i>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%= link_to '#benefits', class: 'round-btn scroll-hash' do %>
+			<i class="fa fa-angle-down" aria-hidden="true"></i>
+		<% end %>
+	</div>
+</div>
+<section class="relative" id="benefits">
+	<div class="container">
+		<h2 class="section-title">UN MUNDO DE BENEFICIOS EN TU SMARTPHONE</h2>
+		<h3 class="section-subtitle">Comprar en La Salada ahora es facilísimo! Descubrí las ventajas de SaladaApp para encontrar todo lo que estás buscando.</h3>
+		<div class="row">
+			<div class="col-xs-6">
+				<ul class="list-unstyled list-round-orange">
+					<li>
+						<div class="vertical-align">
+							<div class="middle">
+								<span class="icon-round-orange shop"></span>
+							</div>
+						</div>
+						<div class="vertical-align">
+							<div class="middle">
+								Simplificá tus compras mediante reservas en los puestos a través de SaladaApp.
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="vertical-align">
+							<div class="middle">
+								<span class="icon-round-orange search"></span>
+							</div>
+						</div>
+						<div class="vertical-align">
+							<div class="middle">
+								Encontrá todo buscando como quieras: Por ofertas, por productos, por puestos, por galpón, por rubros o directamente por palabras claves.
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="vertical-align">
+							<div class="middle">
+								<span class="icon-round-orange pointer"></span>
+							</div>
+						</div>
+						<div class="vertical-align">
+							<div class="middle">
+								Guiate dentro de la feria siguiendo nuestro mapa online y enterate de los horarios de las ferias.
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="vertical-align">
+							<div class="middle">
+								<span class="icon-round-orange bubble"></span>
+							</div>
+						</div>
+						<div class="vertical-align">
+							<div class="middle">
+								Comunicate con todos los usuarios de la app, sean comerciantes puesteros o visitantes compradores. 
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="vertical-align">
+							<div class="middle">
+								<span class="icon-round-orange price-tag"></span>
+							</div>
+						</div>
+						<div class="vertical-align">
+							<div class="middle">
+								Si sos comerciante, podés publicar ofertas, fotos de productos y actualizar toda la información de tu puesto en forma oline en cualquier momento.
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="col-xs-6">
+				<%= image_tag 'cellphones.png', class: 'pull-right img-w-xs-70' %>
+			</div>
+		</div>
+		<%= link_to '#profile', class: 'round-btn scroll-hash' do %>
+			<i class="fa fa-angle-down" aria-hidden="true"></i>
+		<% end %>
+	</div>
+</section>
+<section class="relative bg-light-grey" id="profile">
+	<div class="container">
+		<h2 class="section-title">Elegí tu perfíl</h2>
+		<div class="row">
+			<div class="col-xs-6">
+				<div class="tilebox">
+					<%= link_to packs_path(:visitante) do %>
+						<%= image_tag 'tilebox-visitor.jpg', class: 'tilebox-image' %>
+						<h4 class="tilebox-title">SOY <em>VISITANTE</em> EN LA FERIA Y VOY A COMPRAR</h4>
+						<span class="tilebox-btn">Ver Perfil</span>
+					<% end %>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="tilebox">
+					<%= link_to packs_path(:comerciante) do %>
+						<%= image_tag 'tilebox-seller.jpg', class: 'tilebox-image' %>
+						<h4 class="tilebox-title">SOY <em>COMERCIANTE</em> EN LA FERIA Y TENGO UN PUESTO O LOCAL</h4>
+						<span class="tilebox-btn">Ver Perfil</span>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<%= link_to '#contact', class: 'round-btn scroll-hash' do %>
+			<i class="fa fa-angle-down" aria-hidden="true"></i>
+		<% end %>
+	</div>
+</section>
+<section class="relative bg-orange" id="contact">
+	<div class="container">
+		<h2 class="section-title c-white mb-xs-40">Contacto</h2>
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-3">
+				<%= form_tag '#', class: 'form-lg' do %>
+					<div class="form-group">
+						<input type="text" class="form-control" id="contact_fullname" name="contact[fullname]" placeholder="Nombre y apellido" required>
+				  </div>
+				  <div class="form-group">
+				  	<input type="email" class="form-control" id="contact_email" name="contact[email]" placeholder="Email" required>
+				  </div>
+				  <div class="form-group">
+				  	<input type="tel" class="form-control" id="contact_phone" name="contact[phone]" placeholder="Teléfono">
+				  </div>
+				  <div class="radio">
+				    <label class="radio-inline">
+				      <input type="radio" id="contact_user_role" name="contact[user_role]" required> Soy comerciante
+				    </label>
+				    <label class="radio-inline">
+				    	<input type="radio" id="contact_user_role" name="contact[user_role]" required> Soy visitante
+				    </label>
+				  </div>
+				  <textarea class="form-control" id="contact_text" name="contact[text]" rows="4" placeholder="Observaciones" required></textarea>
+				  <div class="text-center mt-xs-40 mb-xs-40">
+				  	<button type="submit" class="btn btn-default">Enviar</button>
+				  </div>
+				<% end %>
+			</div>
+		</div>
+		<%= link_to '#download', class: 'round-btn scroll-hash' do %>
+			<i class="fa fa-angle-down" aria-hidden="true"></i>
+		<% end %>
+	</div>
+</section>
+<section class="relative bg-light-grey" id="download">
+	<div class="container">
+		<h2 class="section-title mb-xs-40">Descargar</h2>
+		<div class="stores">
+			<%= link_to '#' do %>
+				<%= image_tag 'store-android.png' %>
+			<% end %>
+			<%= link_to '#' do %>
+				<%= image_tag 'store-ios.png' %>
+			<% end %>
+		</div>
+	</div>
+</section>

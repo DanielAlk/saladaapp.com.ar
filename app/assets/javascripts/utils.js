@@ -1,7 +1,80 @@
 var Utils = {};
 
 Utils.init = function() {
-	Utils.start_bs_admin();
+	if ($('body>div#wrapper').length) {
+		Utils.start_bs_admin();
+	} else {
+		Utils.scrollHash();
+		Utils.radios.init();
+		Utils.checkboxes.init();
+	};
+};
+
+Utils.scrollHash = function() {
+	$(document).on('click', '.scroll-hash', function(e) {
+		e.preventDefault();
+		var $this = $(this);
+		var target_id = $this.attr('href');
+		var $target = $(target_id);
+		var $body = $('html, body');
+		if ($target.length) {
+			$body.animate({ scrollTop: $target.offset().top }, 300);
+		} else {
+			window.location.href = '/' + target_id;
+		}
+	});
+};
+
+Utils.radios = function() {
+	$('.radio-inline>input[type=radio]').each(function() {
+		if (this.checked) $(this).parent().addClass('active');
+	});
+};
+
+Utils.radios.init = function() {
+	$(document).on('change', '.radio-inline>input[type=radio]', function(e) {
+		var target = this;
+		$('input[type=radio]').filter(function() {
+			return target.name == this.name;
+		}).parent().removeClass('active');
+		$(this).parent().addClass('active');
+	});
+};
+
+Utils.checkboxes = function() {
+	$('.checkbox-inline>input[type=checkbox]').each(function() {
+		if (this.checked) $(this).parent().addClass('active');
+	});
+	$('.checkbox-inline>input[type=checkbox][name=select_all]').each(function() {
+		var element = this;
+		var selector = $(element).data('target');
+		var $targets = $('input[type=checkbox]'+selector);
+		if ($targets.filter(':checked').length == $targets.length) $(element).prop('checked', true).parent().addClass('active');
+		$targets.data('master', element);
+	});
+};
+
+Utils.checkboxes.init = function() {
+	$(document).on('change', '.checkbox-inline>input[type=checkbox]', function(e) {
+		$(this).parent().toggleClass('active');
+		var master = $(this).data('master');
+		if (master) {
+			if (master.checked && !this.checked) $(master).prop('checked', false).parent().removeClass('active');
+			else if (!master.checked) {
+				var selector = $(master).data('target');
+				var $targets = $('input[type=checkbox]'+selector);
+				if ($targets.filter(':checked').length == $targets.length) $(master).prop('checked', true).parent().addClass('active');
+			};
+		};
+	});
+	$(document).on('change', '.checkbox-inline>input[type=checkbox][name=select_all]', function(e) {
+		var element = this;
+		var selector = $(element).data('target');
+		var $targets = $('input[type=checkbox]'+selector);
+		$targets.filter(function() {
+			return $(element).is(':checked') != $(this).is(':checked');
+		}).click();
+	});
 };
 
 Utils.mp = function(href, params) {

@@ -1,0 +1,32 @@
+<footer>
+	<div class="container">
+		<div class="brand">
+			<%= link_to root_path do %>
+				<%= image_tag 'saladaapp_pages_logo.png' %>
+			<% end %>
+		</div>
+		<nav class="app-nav">
+			<div class="vertical-align h-xs-40">
+				<div class="middle">
+					<ul class="list-inline">
+						<li><%= link_to 'PACKS', '#profile', class: 'scroll-hash' %></li>
+						<li><%= link_to 'DESCARGAR', '#download', class: 'scroll-hash' %></li>
+						<li><%= link_to 'BLOG', blog_path %></li>
+						<li><%= link_to 'CONTACTO', '#contact', class: 'scroll-hash' %></li>
+						<li><%= link_to 'REGISTRATE', '#' %></li>
+						<li><%= link_to 'INICIAR SESIÓN', '#', data: { toggle: 'modal', target: '#modalLogin' } %></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="footer-legend">
+			<p>
+				<span>2017 - Salada App. Todos los derechos reservados.</span>
+				Powered by
+				<%= link_to 'http://vertigodesign.com.ar', target: '_blank' do %>
+					<%= image_tag 'logo-vertigo.png' %>
+				<% end %>
+			</p>
+		</div>
+	</div>
+</footer>
