@@ -78,13 +78,13 @@
       <%= f.select :gallery_name, [ 'Factory', 'Arbol', 'Colores', 'Valencia', 'Quinincha', 'María Concepción' ], { include_blank: 'Seleccioná' }, class: 'form-control', required: true %>
     </div>
   </div>
-  <div class="form-group shop_shed_id" data-control-val="[1]">
+  <div class="form-group shop_shed_id" data-control-val="[1,4]">
     <%= f.label :location, 'Ubicación', class: 'control-label col-sm-3' %>
     <div class="col-sm-9">
       <%= f.select :location, [ ['Pasillo', :aisle], ['Lateral', :side] ], { include_blank: 'Seleccioná' }, class: 'form-control', required: true %>
     </div>
   </div>
-  <div class="form-group shop_shed_id" data-control-val="[1,2,3]">
+  <div class="form-group shop_shed_id" data-control-val="[1,2,3,4]">
     <%= f.label :location_detail, 'Nº Ubicación', class: 'control-label col-sm-3' %>
     <div class="col-sm-9">
       <%= f.text_field :location_detail, class: 'form-control', placeholder: 'Nº Ubicación', required: true %>
