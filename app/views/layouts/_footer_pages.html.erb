@@ -8,14 +8,7 @@
 		<nav class="app-nav">
 			<div class="vertical-align h-xs-40">
 				<div class="middle">
-					<ul class="list-inline">
-						<li><%= link_to 'PACKS', '#profile', class: 'scroll-hash' %></li>
-						<li><%= link_to 'DESCARGAR', '#download', class: 'scroll-hash' %></li>
-						<li><%= link_to 'BLOG', blog_path %></li>
-						<li><%= link_to 'CONTACTO', '#contact', class: 'scroll-hash' %></li>
-						<li><%= link_to 'REGISTRATE', '#' %></li>
-						<li><%= link_to 'INICIAR SESIÓN', '#', data: { toggle: 'modal', target: '#modalLogin' } %></li>
-					</ul>
+					<%= render 'layouts/nav_pages_list' %>
 				</div>
 			</div>
 		</nav>

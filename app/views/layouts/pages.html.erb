@@ -7,9 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<%= render 'layouts/navigation_pages_mobile' %>
 	<%= render 'layouts/navigation_pages' %>
-	<%= yield %>
-	<%= render 'layouts/footer_pages' %>
+	<div class="pages-wrapper">
+		<%= yield %>
+		<%= render 'layouts/footer_pages' %>
+	</div>
 	<%= render 'partials/modal_login' %>
 	<script>
 		$(function() {

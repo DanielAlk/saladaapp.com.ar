@@ -1,0 +1,8 @@
+<ul class="<%= list_class rescue 'list-inline' %>">
+	<li><%= link_to 'PACKS', root_path + '#packs', class: 'scroll-hash' %></li>
+	<li><%= link_to 'DESCARGAR', root_path + '#download', class: 'scroll-hash' %></li>
+	<li><%= link_to 'BLOG', blog_path %></li>
+	<li><%= link_to 'CONTACTO', root_path + '#contact', class: 'scroll-hash' %></li>
+	<li><%= link_to 'REGISTRATE', '#' %></li>
+	<li><%= link_to 'INICIAR SESIÓN', '#', data: { toggle: 'modal', target: '#modalLogin' } %></li>
+</ul>

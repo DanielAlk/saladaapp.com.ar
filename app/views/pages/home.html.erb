@@ -2,7 +2,7 @@
 	Utils.radios();
 <% end %>
 
-<div class="pages-cover-home relative cover h-xs-700 pt-xs-70">
+<div class="pages-cover-home relative cover h-xs-640 h-md-700 pt-xs-70">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-6 col-xs-offset-6">
@@ -22,7 +22,7 @@
 				</div>
 			</div>
 		</div>
-		<%= link_to '#benefits', class: 'round-btn scroll-hash' do %>
+		<%= link_to '/#benefits', class: 'round-btn scroll-hash' do %>
 			<i class="fa fa-angle-down" aria-hidden="true"></i>
 		<% end %>
 	</div>
@@ -32,7 +32,7 @@
 		<h2 class="section-title">UN MUNDO DE BENEFICIOS EN TU SMARTPHONE</h2>
 		<h3 class="section-subtitle">Comprar en La Salada ahora es facilísimo! Descubrí las ventajas de SaladaApp para encontrar todo lo que estás buscando.</h3>
 		<div class="row">
-			<div class="col-xs-6">
+			<div class="col-xs-7 col-md-6">
 				<ul class="list-unstyled list-round-orange">
 					<li>
 						<div class="vertical-align">
@@ -96,16 +96,16 @@
 					</li>
 				</ul>
 			</div>
-			<div class="col-xs-6">
-				<%= image_tag 'cellphones.png', class: 'pull-right img-w-xs-70' %>
+			<div class="col-xs-5 col-md-6">
+				<%= image_tag 'cellphones.png', class: 'pull-right img-w-xs-90 img-w-md-70' %>
 			</div>
 		</div>
-		<%= link_to '#profile', class: 'round-btn scroll-hash' do %>
+		<%= link_to '/#packs', class: 'round-btn scroll-hash' do %>
 			<i class="fa fa-angle-down" aria-hidden="true"></i>
 		<% end %>
 	</div>
 </section>
-<section class="relative bg-light-grey" id="profile">
+<section class="relative bg-light-grey" id="packs">
 	<div class="container">
 		<h2 class="section-title">Elegí tu perfíl</h2>
 		<div class="row">
@@ -128,7 +128,7 @@
 				</div>
 			</div>
 		</div>
-		<%= link_to '#contact', class: 'round-btn scroll-hash' do %>
+		<%= link_to '/#contact', class: 'round-btn scroll-hash' do %>
 			<i class="fa fa-angle-down" aria-hidden="true"></i>
 		<% end %>
 	</div>
@@ -137,7 +137,7 @@
 	<div class="container">
 		<h2 class="section-title c-white mb-xs-40">Contacto</h2>
 		<div class="row">
-			<div class="col-xs-6 col-xs-offset-3">
+			<div class="col-xs-8 col-xs-offset-2 col-md-6 col-md-offset-3">
 				<%= form_tag '#', class: 'form-lg' do %>
 					<div class="form-group">
 						<input type="text" class="form-control" id="contact_fullname" name="contact[fullname]" placeholder="Nombre y apellido" required>
@@ -157,13 +157,13 @@
 				    </label>
 				  </div>
 				  <textarea class="form-control" id="contact_text" name="contact[text]" rows="4" placeholder="Observaciones" required></textarea>
-				  <div class="text-center mt-xs-40 mb-xs-40">
+				  <div class="text-center mt-xs-20 mb-xs-20 mt-md-40 mb-md-40">
 				  	<button type="submit" class="btn btn-default">Enviar</button>
 				  </div>
 				<% end %>
 			</div>
 		</div>
-		<%= link_to '#download', class: 'round-btn scroll-hash' do %>
+		<%= link_to '/#download', class: 'round-btn scroll-hash' do %>
 			<i class="fa fa-angle-down" aria-hidden="true"></i>
 		<% end %>
 	</div>

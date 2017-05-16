@@ -4,24 +4,39 @@ Utils.init = function() {
 	if ($('body>div#wrapper').length) {
 		Utils.start_bs_admin();
 	} else {
+		Utils.mobileNav();
 		Utils.scrollHash();
 		Utils.radios.init();
 		Utils.checkboxes.init();
 	};
 };
 
+Utils.mobileNav = function() {
+	$(document).on('click', '.mobile-nav-trigger', function(e) {
+		e.preventDefault();
+		$('body').toggleClass('mobile-nav-active');
+	});
+	$(document).on('click', '.pages-wrapper', function(e) {
+		$('body').removeClass('mobile-nav-active');
+	});
+	window.matchMedia('(max-width: 767px)').addListener(function() {
+		$('body').removeClass('mobile-nav-active');
+	});
+};
+
 Utils.scrollHash = function() {
 	$(document).on('click', '.scroll-hash', function(e) {
 		e.preventDefault();
 		var $this = $(this);
-		var target_id = $this.attr('href');
+		var target_id = $this.attr('href').substr(1);
 		var $target = $(target_id);
 		var $body = $('html, body');
-		if ($target.length) {
+		if ($target.length && !$body.hasClass('mobile-nav-active')) {
 			$body.animate({ scrollTop: $target.offset().top }, 300);
 		} else {
+			if (window.location.pathname == '/') $('body').removeClass('mobile-nav-active');
 			window.location.href = '/' + target_id;
-		}
+		};
 	});
 };
 

@@ -1,61 +1,23 @@
-<% if @role == :client %>
-	<section class="relative bgi-packs cover c-white ptb-xs-130">
-		<div class="container">
-			<h1 class="section-title text-bold">Visitá la feria desde donde estés</h1>
-			<h2 class="section-subtitle">Elegí la opción más conveniente:</h2>
-			<div class="row row-sp-5">
-				<div class="col-xs-5 col-xs-offset-1">
-					<div class="pack">
+<section class="relative bgi-packs cover c-white ptb-xs-130">
+	<div class="container">
+		<h1 class="section-title text-bold">Visitá la feria desde donde estés</h1>
+		<h2 class="section-subtitle">Elegí la opción más conveniente:</h2>
+		<div class="row row-sp-5">
+			<% pages_packs[@role].each_with_index do |pack, i| %>
+				<div class="col-xs-6 col-md-5 <%= 'col-md-offset-1' if i == 0 %>">
+					<div class="<%= pack[:class] %>">
 						<%= link_to '#' do %>
 							<div class="pack-header">
-								<h4>Visitante Free</h4>
-								<h2>GRATIS</h2>
+								<h4><%= pack[:title] %></h4>
+								<h2><%= pack[:subtitle].html_safe %></h2>
 							</div>
 							<ul class="pack-details">
-								<li>
-									<span>Crear y editar perfil.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Ver todos los galpones.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Ver todos los rubros de productos.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Ver todos los puestos.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Busqueda por productos.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Busqueda por palabras.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Enviar y recibir mensajes.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Ver destacado del día.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Acceder a otros destacados.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Generar reservas de productos.</span>
-									<span>No</span>
-								</li>
-								<li>
-									<span>Promos/Ofertas de productos.</span>
-									<span>No</span>
-								</li>
+								<% pack[:details].each do |detail_name, detail_status| %>
+									<li>
+										<span><%= detail_name %></span>
+										<span><%= detail_status %></span>
+									</li>
+								<% end %>
 							</ul>
 							<div class="pack-actions">
 								<span class="btn btn-default">Obtener</span>
@@ -63,201 +25,7 @@
 						<% end %>
 					</div>
 				</div>
-				<div class="col-xs-5">
-					<div class="pack pack-primary">
-						<%= link_to '#' do %>
-							<div class="pack-header">
-								<h4>Visitante Premium</h4>
-								<h2>$49,99<small>/Mes</small></h2>
-							</div>
-							<ul class="pack-details">
-								<li>
-									<span>Crear y editar perfil.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Ver todos los galpones.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Ver todos los rubros de productos.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Ver todos los puestos.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Busqueda por productos.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Busqueda por palabras.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Enviar y recibir mensajes.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Ver destacado del día.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Acceder a otros destacados.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Generar reservas de productos.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Promos/Ofertas de productos.</span>
-									<span>Si</span>
-								</li>
-							</ul>
-							<div class="pack-actions">
-								<span class="btn btn-primary">Obtener</span>
-							</div>
-						<% end %>
-					</div>
-				</div>
-			</div>
+			<% end %>
 		</div>
-	</section>
-<% elsif @role == :seller %>
-	<section class="relative bgi-packs cover c-white ptb-xs-130">
-		<div class="container">
-			<h1 class="section-title text-bold">Abrí grátis tu puesto en SaladaApp</h1>
-			<h2 class="section-subtitle">Elegí la opción más conveniente:</h2>
-			<div class="row row-sp-5">
-				<div class="col-xs-5 col-xs-offset-1">
-					<div class="pack">
-						<%= link_to '#' do %>
-							<div class="pack-header">
-								<h4>Comerciante Free</h4>
-								<h2>GRATIS</h2>
-							</div>
-							<ul class="pack-details">
-								<li>
-									<span>Crear y editar perfil.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Crear y editar datos de ubicación del puesto.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Crear y editar datos de rubro del puesto.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Publicar productos.</span>
-									<span>Solo 5</span>
-								</li>
-								<li>
-									<span>Publicar avisos destacados.</span>
-									<span>No</span>
-								</li>
-								<li>
-									<span>Imágenes por producto.</span>
-									<span>1</span>
-								</li>
-								<li>
-									<span>Precio por producto.</span>
-									<span>1</span>
-								</li>
-								<li>
-									<span>Publicar ofertas por producto.</span>
-									<span>No</span>
-								</li>
-								<li>
-									<span>Ver rankings de reservas.</span>
-									<span>No</span>
-								</li>
-								<li>
-									<span>Informe de analytics.</span>
-									<span>No</span>
-								</li>
-								<li>
-									<span>Acciones de marketing sobre la base de visitantes.</span>
-									<span>No</span>
-								</li>
-								<li>
-									<span>Validar tu puesto en el mapa.</span>
-									<span>No</span>
-								</li>
-							</ul>
-							<div class="pack-actions">
-								<span class="btn btn-default">Obtener</span>
-							</div>
-						<% end %>
-					</div>
-				</div>
-				<div class="col-xs-5">
-					<div class="pack pack-primary">
-						<%= link_to '#' do %>
-							<div class="pack-header">
-								<h4>Comerciante Premium</h4>
-								<h2>$99,99<small>/Mes</small></h2>
-							</div>
-							<ul class="pack-details">
-								<li>
-									<span>Crear y editar perfil.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Crear y editar datos de ubicación del puesto.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Crear y editar datos de rubro del puesto.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Publicar productos.</span>
-									<span>Ilimitado</span>
-								</li>
-								<li>
-									<span>Publicar avisos destacados.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Imágenes por producto.</span>
-									<span>5</span>
-								</li>
-								<li>
-									<span>Precio por producto.</span>
-									<span>1</span>
-								</li>
-								<li>
-									<span>Publicar ofertas por producto.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Ver rankings de reservas.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Informe de analytics.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Acciones de marketing sobre la base de visitantes.</span>
-									<span>Si</span>
-								</li>
-								<li>
-									<span>Validar tu puesto en el mapa.</span>
-									<span>Si</span>
-								</li>
-							</ul>
-							<div class="pack-actions">
-								<span class="btn btn-primary">Obtener</span>
-							</div>
-						<% end %>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-<% end %>
+	</div>
+</section>
