@@ -1,8 +1,13 @@
 <section class="relative bgi-packs cover c-white ptb-xs-80 ptb-sm-130">
 	<div class="container">
-		<h1 class="section-title text-bold">Visitá la feria desde donde estés</h1>
-		<h2 class="section-subtitle">Elegí la opción más conveniente:</h2>
-		<div class="row-scroll-xs">
+		<% if @role == :client %>
+			<h1 class="section-title text-bold">Visitá la feria desde donde estés</h1>
+			<h2 class="section-subtitle">Elegí la opción más conveniente:</h2>
+		<% elsif @role == :seller %>
+			<h1 class="section-title text-bold">Abrí grátis tu puesto en SaladaApp</h1>
+			<h2 class="section-subtitle">Elegí la opción más conveniente:</h2>
+		<% end %>
+		<div class="row-scroll-xs simpleSlider">
 			<div class="row row-sp-5">
 				<% pages_packs[@role].each_with_index do |pack, i| %>
 					<div class="col-xs-6 col-md-5 <%= 'col-md-offset-1' if i == 0 %>">
@@ -15,8 +20,14 @@
 								<ul class="pack-details">
 									<% pack[:details].each do |detail_name, detail_status| %>
 										<li>
+											<span>
+												<div class="vertical-align">
+													<div class="middle">
+														<%= detail_status %>
+													</div>
+												</div>
+											</span>
 											<span><%= detail_name %></span>
-											<span><%= detail_status %></span>
 										</li>
 									<% end %>
 								</ul>
