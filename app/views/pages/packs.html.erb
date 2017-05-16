@@ -1,31 +1,33 @@
-<section class="relative bgi-packs cover c-white ptb-xs-130">
+<section class="relative bgi-packs cover c-white ptb-xs-80 ptb-sm-130">
 	<div class="container">
 		<h1 class="section-title text-bold">Visitá la feria desde donde estés</h1>
 		<h2 class="section-subtitle">Elegí la opción más conveniente:</h2>
-		<div class="row row-sp-5">
-			<% pages_packs[@role].each_with_index do |pack, i| %>
-				<div class="col-xs-6 col-md-5 <%= 'col-md-offset-1' if i == 0 %>">
-					<div class="<%= pack[:class] %>">
-						<%= link_to '#' do %>
-							<div class="pack-header">
-								<h4><%= pack[:title] %></h4>
-								<h2><%= pack[:subtitle].html_safe %></h2>
-							</div>
-							<ul class="pack-details">
-								<% pack[:details].each do |detail_name, detail_status| %>
-									<li>
-										<span><%= detail_name %></span>
-										<span><%= detail_status %></span>
-									</li>
-								<% end %>
-							</ul>
-							<div class="pack-actions">
-								<span class="btn btn-default">Obtener</span>
-							</div>
-						<% end %>
+		<div class="row-scroll-xs">
+			<div class="row row-sp-5">
+				<% pages_packs[@role].each_with_index do |pack, i| %>
+					<div class="col-xs-6 col-md-5 <%= 'col-md-offset-1' if i == 0 %>">
+						<div class="<%= pack[:class] %>">
+							<%= link_to '#' do %>
+								<div class="pack-header">
+									<h4><%= pack[:title] %></h4>
+									<h2><%= pack[:subtitle].html_safe %></h2>
+								</div>
+								<ul class="pack-details">
+									<% pack[:details].each do |detail_name, detail_status| %>
+										<li>
+											<span><%= detail_name %></span>
+											<span><%= detail_status %></span>
+										</li>
+									<% end %>
+								</ul>
+								<div class="pack-actions">
+									<span class="btn <%= i == 0 ? 'btn-default' : 'btn-primary' %>">Obtener</span>
+								</div>
+							<% end %>
+						</div>
 					</div>
-				</div>
-			<% end %>
+				<% end %>
+			</div>
 		</div>
 	</div>
 </section>
