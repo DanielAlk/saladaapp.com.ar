@@ -26,11 +26,11 @@
 
 				<p><strong>Puesto Nº</strong> <%= @shop.number_id %></p>
 
-				<% if [1].include?(@shed.id) %>
+				<% if [1,4].include?(@shed.id) %>
 					<p><strong>Ubicación:</strong> <%= { aisle: 'Pasillo', side: 'Lateral' }[@shop.location.try(:to_sym)] %></p>
 				<% end %>
 				
-				<% if [1,2,3].include?(@shed.id) %>
+				<% if [1,2,3,4].include?(@shed.id) %>
 					<p><strong>Nº Ubicación:</strong> <%= @shop.location_detail %></p>
 				<% end %>
 				
