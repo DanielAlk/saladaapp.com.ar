@@ -1,0 +1,80 @@
+var Auth = {};
+
+Auth.init = function() {
+	$.auth.configure({
+		apiUrl: '<%= ENV['api_url'] %>'
+	});
+	Auth.forms();
+	Auth.buttons();
+	Auth.authShowHide();
+};
+
+Auth.forms = function() {
+	$(document).on('submit', 'form.authenticate', function(e) {
+		e.preventDefault();
+		var form = this;
+		var $form = $(form);
+		$form.find('.auth-error').remove();
+		$.auth.emailSignIn({
+			email: form.user_email.value,
+			password: form.user_password.value
+		})
+		.then(Auth.reload)
+		.fail(function(response) {
+			var authError = response.data.errors[0] || 'Ocurrió un error, intentalo de nuevo en unos momentos';
+			var $errorDiv = $('<div>', { class: 'auth-error', text: authError });
+			$form.prepend($errorDiv);
+		});
+	});
+};
+
+Auth.buttons = function() {
+	$(document).on('click', '[data-auth="signOut"]', function(e) {
+		e.preventDefault();
+		$.auth.signOut()
+		.then(Auth.reload)
+		.fail(console.log.bind());
+	});
+};
+
+Auth.authShowHide = function() {
+	$(document).on('turbolinks:load', function() {
+		var notification;
+		if (Auth.signedIn()) {
+			$('.auth-hide').hide();
+			$('.auth-show').removeAttr('style');
+		} else {
+			$('.auth-show').hide();
+			$('.auth-hide').removeAttr('style');
+		};
+		if (notification = $.cookie('notification')) {
+			var n = JSON.parse(notification);
+			$.removeCookie('notification', { path: '/' });
+			Utils.notification(n.class, n.text);
+		};
+	});
+};
+
+Auth.signedIn = function() {
+	return $.cookie('user_signed_in') === 'true';
+};
+
+Auth.reload = function() {
+	var notification;
+	if ($.auth.user.signedIn) {
+		notification = JSON.stringify({
+			class: 'notice',
+			text: 'Has iniciado sesión correctamente.'
+		});
+	} else {
+		notification = JSON.stringify({
+			class: 'alert',
+			text: 'Has cerrado sesión correctamente.'
+		});
+	};
+	$.cookie('user_signed_in', $.auth.user.signedIn === true, { path: '/' });
+	$.cookie('notification', notification, { path: '/' });
+	return window.location.reload();
+};
+
+$(Auth.init);

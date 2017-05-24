@@ -1,5 +1,11 @@
 <% content_for :extra_js do %>
 	Utils.radios();
+	$('#contact_form').validate({
+		errorPlacement: function(error, element) {
+			if (element.attr('type') == 'radio') error.appendTo(element.closest('div.radio'));
+			else error.insertAfter(element);
+		}
+	});
 <% end %>
 
 <div class="pages-cover-home relative cover h-xs-640 h-md-700 pt-xs-70">
@@ -138,7 +144,7 @@
 		<h2 class="section-title c-white mb-xs-40">Contacto</h2>
 		<div class="row">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-				<%= form_tag '#', class: 'form-lg' do %>
+				<%= form_tag '#', class: 'form-lg', id: 'contact_form' do %>
 					<div class="form-group">
 						<input type="text" class="form-control" id="contact_fullname" name="contact[fullname]" placeholder="Nombre y apellido" required>
 				  </div>
@@ -150,13 +156,15 @@
 				  </div>
 				  <div class="radio">
 				    <label class="radio-inline">
-				      <input type="radio" id="contact_user_role" name="contact[user_role]" required> Soy comerciante
+				      <input type="radio" id="contact_user_role" name="contact[user_role]" data-msg-required="Elige una opción" required> Soy comerciante
 				    </label>
 				    <label class="radio-inline">
 				    	<input type="radio" id="contact_user_role" name="contact[user_role]" required> Soy visitante
 				    </label>
 				  </div>
-				  <textarea class="form-control" id="contact_text" name="contact[text]" rows="4" placeholder="Observaciones" required></textarea>
+				  <div class="form-group">
+				  	<textarea class="form-control" id="contact_text" name="contact[text]" rows="4" placeholder="Observaciones" required></textarea>
+				  </div>
 				  <div class="text-center mt-xs-20 mb-xs-20 mt-md-40 mb-md-40">
 				  	<button type="submit" class="btn btn-default">Enviar</button>
 				  </div>
