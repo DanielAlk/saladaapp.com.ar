@@ -238,19 +238,8 @@
 						</li>
 					</ul>
 				</li>
-				<li class="<%= sidebar_link_class(:contacts) %>">
-					<a href="#"><i class="fa fa-envelope fa-fw"></i> Contactos<span class="fa arrow"></span></a>
-					<ul class="nav nav-second-level collapse <%= 'in' if controller_name.to_sym == :contacts %>">
-						<li>
-							<%= link_to 'Agregar Contacto', new_contact_path, class: sidebar_link_class(:contacts, :new) %>
-						</li>
-						<li>
-							<a href="<%= contacts_path %>" class="<%= sidebar_link_class(:contacts, :index) %>">Lista de contactos</a>
-						</li>
-					</ul>
-				</li>
 				<li class="<%= sidebar_link_class(:categories) %>">
-					<a href="#"><i class="fa fa-table fa-fw"></i> Categorías<span class="fa arrow"></span></a>
+					<a href="#"><i class="fa fa-tasks fa-fw"></i> Categorías<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level collapse <%= 'in' if controller_name.to_sym == :categories %>">
 						<li>
 							<%= link_to 'Agregar Categoría', new_category_path, class: sidebar_link_class(:categories, :new) %>
@@ -261,13 +250,24 @@
 					</ul>
 				</li>
 				<li class="<%= sidebar_link_class(:shops) %>">
-					<a href="#"><i class="fa fa-table fa-fw"></i> Puestos<span class="fa arrow"></span></a>
+					<a href="#"><i class="fa fa-shopping-cart fa-fw"></i> Puestos<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level collapse <%= 'in' if controller_name.to_sym == :shops %>">
 						<li>
 							<%= link_to 'Agregar Puesto', new_shop_path, class: sidebar_link_class(:shops, :new) %>
 						</li>
 						<li>
 							<a href="<%= shops_path %>" class="<%= sidebar_link_class(:shops, :index) %>">Lista de puestos</a>
+						</li>
+					</ul>
+				</li>
+				<li class="<%= sidebar_link_class(:contacts) %>">
+					<a href="#"><i class="fa fa-support fa-fw"></i> Contactos<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level collapse <%= 'in' if controller_name.to_sym == :contacts %>">
+						<li>
+							<%= link_to 'Agregar Contacto', new_contact_path, class: sidebar_link_class(:contacts, :new) %>
+						</li>
+						<li>
+							<a href="<%= contacts_path %>" class="<%= sidebar_link_class(:contacts, :index) %>">Lista de contactos</a>
 						</li>
 					</ul>
 				</li>

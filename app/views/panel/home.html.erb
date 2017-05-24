@@ -1,11 +1,95 @@
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">SaladaApp Panel</h1>
-		<div class="btn-group" role="group" aria-label="...">
-			<%= link_to 'Usuarios', users_path, class: 'btn btn-primary' %>
-			<%= link_to 'Puestos', shops_path, class: 'btn btn-info' %>
-			<%= link_to 'Categorías', categories_path, class: 'btn btn-warning' %>
-			<%= link_to 'Contactos', contacts_path, class: 'btn btn-danger' %>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-users fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge"><%= @users.count %></div>
+						<div>Usuarios</div>
+					</div>
+				</div>
+			</div>
+			<%= link_to users_path do %>
+				<div class="panel-footer">
+					<span class="pull-left">Ver usuarios</span>
+					<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-green">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-tasks fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge"><%= @categories.count %></div>
+						<div>Categorías</div>
+					</div>
+				</div>
+			</div>
+			<%= link_to categories_path do %>
+				<div class="panel-footer">
+					<span class="pull-left">Ver categorías</span>
+					<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-yellow">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-shopping-cart fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge"><%= @shops.count %></div>
+						<div>Puestos</div>
+					</div>
+				</div>
+			</div>
+			<%= link_to shops_path do %>
+				<div class="panel-footer">
+					<span class="pull-left">Ver puestos</span>
+					<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-red">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="fa fa-support fa-5x"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge"><%= @contacts.count %></div>
+						<div>Contactos</div>
+					</div>
+				</div>
+			</div>
+			<%= link_to contacts_path do %>
+				<div class="panel-footer">
+					<span class="pull-left">Ver contactos</span>
+					<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			<% end %>
 		</div>
 	</div>
 </div>

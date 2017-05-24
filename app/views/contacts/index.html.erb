@@ -47,51 +47,41 @@
             <th>
               <a href="#" data-order="name">
                 Nombre
-                <% if (params[:f][:order].to_sym == :name_asc rescue false) %>
-                  <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                <% elsif (params[:f][:order].to_sym == :name_desc rescue false) %>
-                  <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                <% end %>
+                <small>
+                  <i class="fa fa-sort<%= (params[:f][:order].starts_with?('name_') ? '-' + params[:f][:order][/(?:asc|desc)$/] : nil) rescue nil %>" aria-hidden="true"></i>
+                </small>
               </a>
             </th>
             <th>
               <a href="#" data-order="email">
                 Email
-                <% if (params[:f][:order].to_sym == :email_asc rescue false) %>
-                  <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                <% elsif (params[:f][:order].to_sym == :email_desc rescue false) %>
-                  <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                <% end %>
+                <small>
+                  <i class="fa fa-sort<%= (params[:f][:order].starts_with?('email_') ? '-' + params[:f][:order][/(?:asc|desc)$/] : nil) rescue nil %>" aria-hidden="true"></i>
+                </small>
               </a>
             </th>
             <th>
               <a href="#" data-order="tel">
                 Teléfono
-                <% if (params[:f][:order].to_sym == :tel_asc rescue false) %>
-                  <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                <% elsif (params[:f][:order].to_sym == :tel_desc rescue false) %>
-                  <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                <% end %>
+                <small>
+                  <i class="fa fa-sort<%= (params[:f][:order].starts_with?('tel_') ? '-' + params[:f][:order][/(?:asc|desc)$/] : nil) rescue nil %>" aria-hidden="true"></i>
+                </small>
               </a>
             </th>
             <th>
               <a href="#" data-order="role">
                 Tipo Usuario
-                <% if (params[:f][:order].to_sym == :role_asc rescue false) %>
-                  <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                <% elsif (params[:f][:order].to_sym == :role_desc rescue false) %>
-                  <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                <% end %>
+                <small>
+                  <i class="fa fa-sort<%= (params[:f][:order].starts_with?('role_') ? '-' + params[:f][:order][/(?:asc|desc)$/] : nil) rescue nil %>" aria-hidden="true"></i>
+                </small>
               </a>
             </th>
             <th>
               <a href="#" data-order="subject">
                 Asunto
-                <% if (params[:f][:order].to_sym == :subject_asc rescue false) %>
-                  <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                <% elsif (params[:f][:order].to_sym == :subject_desc rescue false) %>
-                  <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                <% end %>
+                <small>
+                  <i class="fa fa-sort<%= (params[:f][:order].starts_with?('subject_') ? '-' + params[:f][:order][/(?:asc|desc)$/] : nil) rescue nil %>" aria-hidden="true"></i>
+                </small>
               </a>
             </th>
             <th></th>
