@@ -213,4 +213,24 @@ Utils.autonumeric = function() {
 	$('input.autonumeric-price').autoNumeric('init', { aSep: '.', aDec: ',', aPad: 2 });
 };
 
+Utils.filtersForm = function() {
+	var $form = $('#filters_form');
+	var $input = $('#f_order');
+	var current_order = $input.val() == '' ? false : $input.val();
+	$('[data-order]').click(function(e) {
+	  var $this = $(this);
+	  var order = $this.data('order');
+	  var new_order, match;
+	  if (current_order && (match = current_order.match(new RegExp(order + '_(asc|desc)')))) {
+	    var current_dir = match[1];
+	    var dir = current_dir == 'asc' ? 'desc' : 'asc';
+	    new_order = order + '_' + dir;
+	  } else {
+	    new_order = order + '_asc';
+	  };
+	  $input.val(new_order);
+	  $form.submit();
+	});
+};
+
 $(Utils.init);

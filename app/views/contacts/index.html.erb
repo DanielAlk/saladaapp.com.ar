@@ -1,0 +1,125 @@
+<% content_for :extra_js do %>
+  Utils.filtersForm();
+<% end %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      Contactos
+      <%= link_to 'Agregar contacto', new_contact_path, class: 'btn btn-primary pull-right' %>
+    </h1>
+    <div class="filters-table">
+      <form id="filters_form" method="get">
+        <input type="hidden" name="f[order]" id="f_order" value="<%= params[:f][:order].to_s rescue nil %>">
+        <div class="form-group">
+          <div class="col-xs-12 mb-10">
+            <input type="search" class="form-control" id="f_search" name="f[search]" placeholder="Busqueda por palabra" value="<%= params[:f][:search] rescue nil %>">
+          </div>
+          <div class="col-xs-3 mb-10">
+            <select id="f_scopes_role" class="form-control" name="f[scopes][role]">
+              <option value="">Tipo de usuario</option>
+              <option value="client" <%= 'selected="selected"' if params[:f][:scopes][:role].to_sym == :client rescue nil %>>Visitante</option>
+              <option value="seller" <%= 'selected="selected"' if params[:f][:scopes][:role].to_sym == :seller rescue nil %>>Comerciante</option>
+            </select>
+          </div>
+          <div class="col-xs-3 mb-10">
+            <select id="f_scopes_read" class="form-control" name="f[scopes][read]">
+              <option value="">Ver mensajes</option>
+              <option value="0" <%= 'selected="selected"' if params[:f][:scopes][:read] == 0.to_s rescue nil %>>No Leídos</option>
+              <option value="1" <%= 'selected="selected"' if params[:f][:scopes][:read] == 1.to_s rescue nil %>>Leídos</option>
+            </select>
+          </div>
+          <div class="col-xs-3">
+            <a href="<%= contacts_path %>" class="btn btn-default btn-block">Limpiar filtros</a>
+          </div>
+          <div class="col-xs-3">
+            <button type="submit" class="btn btn-primary btn-block">Buscar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <% if @contacts.blank? %>
+      <h5 class="blank-search">No se encontraron contactos que coincidan con tu búsqueda</h5>
+    <% else %>
+      <table class="table table-striped table-controls" width="100%">
+        <thead>
+          <tr>
+            <th>
+              <a href="#" data-order="name">
+                Nombre
+                <% if (params[:f][:order].to_sym == :name_asc rescue false) %>
+                  <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <% elsif (params[:f][:order].to_sym == :name_desc rescue false) %>
+                  <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                <% end %>
+              </a>
+            </th>
+            <th>
+              <a href="#" data-order="user">
+                Email
+                <% if (params[:f][:order].to_sym == :email_asc rescue false) %>
+                  <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <% elsif (params[:f][:order].to_sym == :email_desc rescue false) %>
+                  <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                <% end %>
+              </a>
+            </th>
+            <th>
+              <a href="#" data-order="description">
+                Teléfono
+                <% if (params[:f][:order].to_sym == :tel_asc rescue false) %>
+                  <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <% elsif (params[:f][:order].to_sym == :tel_desc rescue false) %>
+                  <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                <% end %>
+              </a>
+            </th>
+            <th>
+              <a href="#" data-order="shed">
+                Tipo Usuario
+                <% if (params[:f][:order].to_sym == :role_asc rescue false) %>
+                  <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <% elsif (params[:f][:order].to_sym == :role_desc rescue false) %>
+                  <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                <% end %>
+              </a>
+            </th>
+            <th>
+              <a href="#" data-order="description">
+                Asunto
+                <% if (params[:f][:order].to_sym == :subject_asc rescue false) %>
+                  <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <% elsif (params[:f][:order].to_sym == :subject_desc rescue false) %>
+                  <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                <% end %>
+              </a>
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @contacts.each do |contact| %>
+            <tr>
+              <td><%= contact.name %></td>
+              <td><%= contact.email %></td>
+              <td><%= contact.tel %></td>
+              <td><%= { client: 'Visitante', seller: 'Comerciante' }[contact.role.try(:to_sym)] %></td>
+              <td><%= { contact: 'Contacto' }[contact.subject.try(:to_sym)] %></td>
+              <td>
+                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                  <%= link_to '<i class="fa fa-eye" aria-hidden="true"></i>'.html_safe, contact, class: 'btn btn-default' %>
+                  <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_contact_path(contact), class: 'btn btn-info' %>
+                  <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    <div class="pagination-table">
+      <%= paginate @contacts %>
+    </div>
+  </div>
+</div>

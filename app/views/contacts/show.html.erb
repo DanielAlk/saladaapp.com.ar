@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      Datos de Contacto
+      <%= link_to 'Agregar contacto', new_contact_path, class: 'btn btn-primary pull-right' %>
+    </h1>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_contact_path(@contact), class: 'btn btn-xs btn-info' %>
+        <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, @contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %>
+        <strong>Contacto de <%= @contact.name %> <small><%= @contact.email %></small></strong>
+      </div>
+      <div class="panel-body">
+        <p><strong>Nombre:</strong> <%= @contact.name %></p>
+        <p><strong>Email:</strong> <%= @contact.email %></p>
+        <p><strong>Tipo de usuario:</strong> <%= { client: 'Visitante', seller: 'Comerciante' }[@contact.role.try(:to_sym)] %></p>
+        <p><strong>Teléfono:</strong> <%= @contact.tel %></p>
+        <p><strong>Asunto:</strong> <%= { contact: 'Contacto' }[@contact.subject.try(:to_sym)] %></p>
+        <p><strong>Mensaje:</strong> <%= @contact.message.html_safe %></p>
+      </div>
+    </div>
+  </div>
+</div>

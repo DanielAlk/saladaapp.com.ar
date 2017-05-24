@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-
   constraints subdomain: /panel/ do
     get '/', to: 'panel#home', as: :panel
     resources :categories
     resources :shops
     resources :payments
     resources :users
+    resources :contacts
   end
 
   root 'pages#home'
