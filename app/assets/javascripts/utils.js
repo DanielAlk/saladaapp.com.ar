@@ -15,6 +15,21 @@ Utils.init = function() {
 	};
 };
 
+Utils.media = function(device, callback) {
+	var devices = { mobile: '(max-width: 767px)', tablet: '(max-width: 991px)', laptop: '(max-width: 1199px)' };
+	if (typeof device === 'function') {
+		for (var key in devices) window.matchMedia(devices[key]).addListener(device);
+	} else if (!!devices[device] && !!callback) {
+		window.matchMedia(devices[device]).addListener(callback);
+	} else if (!!devices[device]) {
+		for (var key in devices) { if (window.matchMedia(devices[key]).matches) return key == device; }; return false;
+	} else if (device == 'desktop') {
+		return window.matchMedia('(min-width: 1200px)').matches;
+	} else {
+		for (var key in devices) { if (window.matchMedia(devices[key]).matches) return key; }; return 'desktop';
+	}
+};
+
 Utils.simpleSlider = function() {
 	$(document).on('swipeleft', '.simpleSlider', function(e) {
 		var $slider = $(e.target).closest('.simpleSlider');
@@ -31,13 +46,13 @@ Utils.mobileNav = function() {
 		e.preventDefault();
 		$('body').toggleClass('mobile-nav-active');
 	});
-	$(document).on('click', '.pages-wrapper', function(e) {
+	$(document).on('click', '.mobile-nav-active .pages-wrapper', function(e) {
 		$('body').removeClass('mobile-nav-active');
 	});
-	$(document).on('tap', '.pages-wrapper', function(e) {
+	$(document).on('tap', '.mobile-nav-active .pages-wrapper', function(e) {
 		$('body').removeClass('mobile-nav-active');
 	});
-	window.matchMedia('(max-width: 767px)').addListener(function() {
+	Utils.media('mobile', function() {
 		$('body').removeClass('mobile-nav-active');
 	});
 };
@@ -235,6 +250,20 @@ Utils.filtersForm = function() {
 	  $input.val(new_order);
 	  $form.submit();
 	});
+};
+
+Utils.insertFormResponse = function(form, text, fadeOutDelay) {
+	var $response = $('<div>', { class: 'form-js-response' }).height(form.scrollHeight).hide();
+	var $va = $('<div>', { class: 'vertical-align' }).append($('<div>', { class: 'middle', html: text }));
+	$(form).after($response.append($va));
+	$response.fadeIn();
+	if (typeof fadeOutDelay === 'number' || fadeOutDelay === true) {
+		setTimeout(function() {
+			$response.fadeOut(function() {
+				$response.remove();
+			});
+		}, fadeOutDelay || 3000);
+	};
 };
 
 $(Utils.init);
