@@ -1,5 +1,18 @@
 <% content_for :extra_js do %>
-  $('.new_contact, .edit_contact').validate();
+  $('.new_contact, .edit_contact').validate({
+    rules: {
+      'contact[tel]': {
+        pattern: /^(?:[0-9\+\-\(\)\s]+)$/,
+        minlength: 6,
+        maxlength: 20
+      }
+    },
+    messages: {
+      'contact[tel]': {
+        pattern: 'Ingresá un teléfono válido'
+      }
+    }
+  });
 <% end %>
 
 <%= form_for(@contact) do |f| %>
@@ -18,13 +31,13 @@
   <div class="form-group">
     <%= f.label :name, 'Nombre', class: 'control-label col-sm-3' %>
     <div class="col-sm-9">
-      <%= f.text_field :name, class: 'form-control', placeholder: 'Nombre', required: true %>
+      <%= f.text_field :name, class: 'form-control', placeholder: 'Nombre y apellido', required: true %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :email, 'Email', class: 'control-label col-sm-3' %>
     <div class="col-sm-9">
-      <%= f.text_field :email, class: 'form-control', placeholder: 'Email', required: true %>
+      <%= f.email_field :email, class: 'form-control', placeholder: 'Email', required: true %>
     </div>
   </div>
   <div class="form-group">

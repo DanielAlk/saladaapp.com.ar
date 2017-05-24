@@ -1,9 +1,21 @@
 <% content_for :extra_js do %>
 	Utils.radios();
-	$('#contact_form').validate({
+	$('#new_contact').validate({
 		errorPlacement: function(error, element) {
 			if (element.attr('type') == 'radio') error.appendTo(element.closest('div.radio'));
 			else error.insertAfter(element);
+		},
+		rules: {
+			'contact[tel]': {
+				pattern: /^(?:[0-9\+\-\(\)\s]+)$/,
+				minlength: 6,
+				maxlength: 20
+			}
+		},
+		messages: {
+			'contact[tel]': {
+				pattern: 'Ingresá un teléfono válido'
+			}
 		}
 	});
 <% end %>
@@ -144,29 +156,29 @@
 		<h2 class="section-title c-white mb-xs-40">Contacto</h2>
 		<div class="row">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-				<%= form_tag '#', class: 'form-lg', id: 'contact_form' do %>
+				<%= form_for Contact.new, remote: true, html: { class: 'form-lg trigger-loader' } do |f| %>
 					<div class="form-group">
-						<input type="text" class="form-control" id="contact_fullname" name="contact[fullname]" placeholder="Nombre y apellido" required>
-				  </div>
-				  <div class="form-group">
-				  	<input type="email" class="form-control" id="contact_email" name="contact[email]" placeholder="Email" required>
-				  </div>
-				  <div class="form-group">
-				  	<input type="tel" class="form-control" id="contact_phone" name="contact[phone]" placeholder="Teléfono">
-				  </div>
-				  <div class="radio">
-				    <label class="radio-inline">
-				      <input type="radio" id="contact_user_role" name="contact[user_role]" data-msg-required="Elige una opción" required> Soy comerciante
-				    </label>
-				    <label class="radio-inline">
-				    	<input type="radio" id="contact_user_role" name="contact[user_role]" required> Soy visitante
-				    </label>
-				  </div>
-				  <div class="form-group">
-				  	<textarea class="form-control" id="contact_text" name="contact[text]" rows="4" placeholder="Observaciones" required></textarea>
-				  </div>
+						<%= f.text_field :name, class: 'form-control', placeholder: 'Nombre y apellido', required: true %>
+					</div>
+					<div class="form-group">
+						<%= f.email_field :email, class: 'form-control', placeholder: 'Email', required: true %>
+					</div>
+					<div class="form-group">
+						<%= f.text_field :tel, class: 'form-control', placeholder: 'Teléfono' %>
+					</div>
+					<div class="radio">
+					  <label class="radio-inline">
+					  	<%= f.radio_button :role, :seller, required: true, data: { msg: 'Elige una opción' } %> Soy comerciante
+					  </label>
+					  <label class="radio-inline">
+					  	<%= f.radio_button :role, :client, required: true %> Soy visitante
+					  </label>
+					</div>
+					<div class="form-group">
+						<%= f.text_area :message, class: 'form-control', placeholder: 'Observaciones', rows: 4, required: true, minlength: 15 %>
+					</div>
 				  <div class="text-center mt-xs-20 mb-xs-20 mt-md-40 mb-md-40">
-				  	<button type="submit" class="btn btn-default">Enviar</button>
+				  	<%= f.submit 'Enviar', class: 'btn btn-default' %>
 				  </div>
 				<% end %>
 			</div>

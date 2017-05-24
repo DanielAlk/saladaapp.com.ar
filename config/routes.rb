@@ -5,13 +5,15 @@ Rails.application.routes.draw do
     resources :shops
     resources :payments
     resources :users
-    resources :contacts
+    resources :contacts, except: :create
   end
 
   root 'pages#home'
   get 'packs/:role', to: 'pages#packs', role: /visitante|comerciante/, as: :packs
   get 'blog', to: 'pages#blog', as: :blog
   get 'article', to: 'pages#article', as: :article
+  resources :contacts, only: :create
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

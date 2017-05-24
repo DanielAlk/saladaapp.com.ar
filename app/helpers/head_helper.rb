@@ -4,7 +4,7 @@ module HeadHelper
 	end
 
 	def head_title
-		'SaladaApp'
+		request.subdomain.try(:to_sym) == :panel ? 'Panel SaladaApp' : 'SaladaApp'
 	end
 
 	def head_description

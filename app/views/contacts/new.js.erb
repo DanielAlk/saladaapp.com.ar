@@ -1,0 +1,22 @@
+Utils.loader().hide();
+var errors = JSON.parse("<%= j @contact.errors.to_json.html_safe %>");
+var notification;
+for (var key in errors) {
+	var error = errors[key];
+	notification = error[0];
+}
+var form = document.getElementById('new_contact');
+var form_height = form.scrollHeight;
+var $response = $('<div>', { class: 'form-js-response' }).height(form_height)
+.append(
+	$('<div>', { class: 'vertical-align' })
+	.append($('<div>', { class: 'middle', text: notification }))
+);
+$(form).after($response);
+Utils.notification('notice', notification);
+setTimeout(function() {
+	$response.fadeOut(function() {
+		$response.remove();
+	});
+}, 3000);
+console.info('Contact Error', errors);

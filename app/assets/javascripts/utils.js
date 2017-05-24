@@ -9,6 +9,9 @@ Utils.init = function() {
 		Utils.simpleSlider();
 		Utils.radios.init();
 		Utils.checkboxes.init();
+		$(document).on('submit', 'form.trigger-loader', function(e) {
+			if ($(this).valid()) Utils.loader();
+		});
 	};
 };
 
@@ -218,6 +221,7 @@ Utils.filtersForm = function() {
 	var $input = $('#f_order');
 	var current_order = $input.val() == '' ? false : $input.val();
 	$('[data-order]').click(function(e) {
+		e.preventDefault();
 	  var $this = $(this);
 	  var order = $this.data('order');
 	  var new_order, match;

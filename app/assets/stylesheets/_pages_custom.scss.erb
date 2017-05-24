@@ -10,6 +10,11 @@
 
 body { font-family: 'Roboto', sans-serif; }
 
+.overflow-hidden { overflow:hidden!important; }
+body>div.loader { position: fixed; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); top: 0; left: 0; background-repeat: no-repeat; background-position: center center; background-size: 80px 80px; z-index: 999999999999; background-image: url('<%= asset_path 'loader.gif' %>');
+	&:after {content: 'Cargando…';color: #ccc;display: block;text-align: center;position: absolute;width: 100%;top: calc(50% + 60px);}
+}
+
 .vertical-align { display: table; height: inherit;
 	&>.middle { display: table-cell; vertical-align: middle; }
 }
@@ -389,4 +394,8 @@ label.error { position: absolute; display: block; text-align: center; width: 100
 .notification { position: fixed; right: 0; top: 0; color: #FFF; z-index: 99999; padding: 10px 15px; text-align: center; margin: 15px; border-radius: 4px;
 	&.notice { background-color: $brand-success; }
 	&.alert { background-color: $brand-danger; }
+}
+
+.form-js-response { padding: 0 15px; text-align: center; background-color: rgba(253, 152, 71, 0.9); font-size: 18px; position: absolute; top: 0; left: 0; z-index: 1; color: #fff; font-weight: 600; text-shadow: 0 0 7px #000; width: 100%;
+	.vertical-align { width: 100%; }
 }

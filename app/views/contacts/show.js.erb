@@ -1,0 +1,13 @@
+Utils.loader().hide();
+var contact = JSON.parse("<%= j @contact.to_json.html_safe %>");
+var notification = 'Gracias por contactarte ' + contact.name + ', reponderemos tu consulta a la brevedad.';
+var form = document.getElementById('new_contact');
+var form_height = form.scrollHeight;
+var $response = $('<div>', { class: 'form-js-response' }).height(form_height)
+.append(
+	$('<div>', { class: 'vertical-align' })
+	.append($('<div>', { class: 'middle', text: notification }))
+);
+$(form).after($response);
+Utils.notification('notice', notification);
+console.info('Contact Created', contact);
