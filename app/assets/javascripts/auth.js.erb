@@ -1,12 +1,29 @@
 var Auth = {};
 
 Auth.init = function() {
+	Auth.config();
+	Auth.events();
+	Auth.forms();
+	Auth.buttons();
+	Auth.showHide();
+	Auth.bind();
+};
+
+Auth.config = function() {
 	$.auth.configure({
 		apiUrl: '<%= ENV['api_url'] %>'
 	});
-	Auth.forms();
-	Auth.buttons();
-	Auth.authShowHide();
+};
+
+Auth.events = function() {
+	PubSub.subscribe('auth.validation.error', function() {
+		Auth.signedIn = false;
+		$(document).trigger('auth.validation.error');
+	});
+	PubSub.subscribe('auth.validation.success', function() {
+		Auth.signedIn = true;
+		$(document).trigger('auth.validation.success');
+	});
 };
 
 Auth.forms = function() {
@@ -37,10 +54,10 @@ Auth.buttons = function() {
 	});
 };
 
-Auth.authShowHide = function() {
-	$(document).on('turbolinks:load', function() {
+Auth.showHide = function() {
+	$(document).on('turbolinks:load auth.validation.success auth.validation.error', function() {
 		var notification;
-		if (Auth.signedIn()) {
+		if (Auth.signedIn) {
 			$('.auth-hide').hide();
 			$('.auth-show').removeAttr('style');
 		} else {
@@ -55,8 +72,16 @@ Auth.authShowHide = function() {
 	});
 };
 
-Auth.signedIn = function() {
-	return $.cookie('user_signed_in') === 'true';
+Auth.bind = function() {
+	$(document).on('turbolinks:load auth.validation.success', function() {
+		if (!$.isEmptyObject($.auth.user)) {
+			$('[data-auth-bind]').each(function() {
+				var $this = $(this);
+				var property = $this.data('auth-bind');
+				$this.text($.auth.user[property]);
+			});
+		};
+	});
 };
 
 Auth.reload = function() {
@@ -72,7 +97,6 @@ Auth.reload = function() {
 			text: 'Has cerrado sesión correctamente.'
 		});
 	};
-	$.cookie('user_signed_in', $.auth.user.signedIn === true, { path: '/' });
 	$.cookie('notification', notification, { path: '/' });
 	return window.location.reload();
 };

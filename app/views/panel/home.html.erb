@@ -78,8 +78,8 @@
 						<i class="fa fa-support fa-5x"></i>
 					</div>
 					<div class="col-xs-9 text-right">
-						<div class="huge"><%= @contacts.count %></div>
-						<div>Contactos</div>
+						<div class="huge"><%= @panel_data[:unread_contacts_count] %><small>/<%= @contacts.count %></small></div>
+						<div>Contactos sin leer</div>
 					</div>
 				</div>
 			</div>

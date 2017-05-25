@@ -181,7 +181,6 @@ Utils.loader = function() {
 Utils.start_bs_admin = function() {
 	//Loads the correct sidebar on window load, collapses the sidebar on window resize. Sets the min-height of #page-wrapper to window size
 	var bs = function() {
-		$('#side-menu').metisMenu();
 		var topOffset = 50;
 		var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 		if (width < 768) {
@@ -197,19 +196,11 @@ Utils.start_bs_admin = function() {
 			$("#page-wrapper").css("min-height", (height) + "px");
 		}
 	};
+	$(document).on("turbolinks:load", function() {
+		$('#side-menu').metisMenu();
+	});
+	$(document).on("turbolinks:load", bs);
 	$(window).bind("load resize", bs);
-	document.addEventListener("turbolinks:load", bs);
-	//var url = window.location;
-	//var element = $('ul.nav a').filter(function() {
-	//	return this.href == url;
-	//}).addClass('active').parent();
-	//while (true) {
-	//	if (element.is('li')) {
-	//		element = element.parent().addClass('in').parent();
-	//	} else {
-	//		break;
-	//	}
-	//}
 }
 
 Utils.notification = function(n_class, text) {
