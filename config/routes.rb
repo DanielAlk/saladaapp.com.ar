@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   constraints subdomain: /panel/ do
     get '/', to: 'panel#home', as: :panel
+    get '/login', to: 'panel#login', as: :panel_login
     resources :categories
     resources :shops
     resources :payments

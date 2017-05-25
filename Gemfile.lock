@@ -70,6 +70,7 @@ GEM
       sass (>= 3.2)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    hiredis (0.6.1)
     i18n (0.7.0)
     jbuilder (2.6.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -139,6 +140,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (11.3.0)
     rdoc (4.3.0)
+    redis (3.3.0)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -191,12 +193,14 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   figaro
   font-awesome-sass
+  hiredis (~> 0.6.0)
   jbuilder (~> 2.0)
   jquery-cookie-rails
   jquery-rails
   jquery-validation-rails
   kaminari
   rails (= 4.2.6)
+  redis (~> 3.2)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
