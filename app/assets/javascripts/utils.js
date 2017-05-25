@@ -8,11 +8,11 @@ Utils.init = function() {
 		Utils.scrollHash();
 		Utils.simpleSlider();
 		Utils.radios.init();
-		Utils.checkboxes.init();
 		$(document).on('submit', 'form.trigger-loader', function(e) {
 			if ($(this).valid()) Utils.loader();
 		});
 	};
+	Utils.checkboxes.init();
 };
 
 Utils.media = function(device, callback) {
