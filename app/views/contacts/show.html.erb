@@ -9,6 +9,9 @@
         <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_contact_path(@contact), class: 'btn btn-xs btn-info' %>
         <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, @contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %>
         <strong>Contacto de <%= @contact.name %> <small><%= @contact.email %></small></strong>
+        <%= link_to contacts_path, class: 'btn btn-xs btn-warning pull-right' do %>
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
+        <% end %>
       </div>
       <div class="panel-body">
         <p><strong>Nombre:</strong> <%= @contact.name %></p>

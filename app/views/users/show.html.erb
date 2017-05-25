@@ -5,6 +5,9 @@
 			<div class="panel-heading">
 				<%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_user_path(@user), class: 'btn btn-xs btn-info' %>
 				<strong><%= @user.name %></strong>
+        <%= link_to users_path, class: 'btn btn-xs btn-warning pull-right' do %>
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
+        <% end %>
 			</div>
 			<div class="panel-body">
 				<div class="pull-right">

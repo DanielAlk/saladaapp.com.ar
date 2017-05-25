@@ -2,28 +2,38 @@
   $('.new_category, .edit_category').validate();
 <% end %>
 
-<%= form_for(@category) do |f| %>
-  <% if @category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= action_name == 'edit' ? 'Editar' : 'Agregar' %> Categoría
+    <%= link_to categories_path, class: 'btn btn-xs btn-warning pull-right' do %>
+      <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
+    <% end %>
+  </div>
+  <div class="panel-body">
+    <%= form_for(@category) do |f| %>
+      <% if @category.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
 
-      <ul>
-      <% @category.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @category.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="form-group">
-    <%= f.label :title, 'Título', class: 'control-label col-sm-3' %>
-    <div class="col-sm-9">
-      <%= f.text_field :title, class: 'form-control', placeholder: 'Título', required: true %>
-    </div>
+      <div class="form-group">
+        <%= f.label :title, 'Título', class: 'control-label col-sm-3' %>
+        <div class="col-sm-9">
+          <%= f.text_field :title, class: 'form-control', placeholder: 'Título', required: true %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+          <%= f.submit class: 'btn btn-default' %>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div class="form-group">
-    <div class="col-sm-9 col-sm-offset-3">
-      <%= f.submit class: 'btn btn-default' %>
-    </div>
-  </div>
-<% end %>
+</div>

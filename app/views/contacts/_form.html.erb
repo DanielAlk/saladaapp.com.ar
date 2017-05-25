@@ -15,52 +15,62 @@
   });
 <% end %>
 
-<%= form_for(@contact) do |f| %>
-  <% if @contact.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= action_name == 'edit' ? 'Editar' : 'Agregar' %> Contacto
+    <%= link_to contacts_path, class: 'btn btn-xs btn-warning pull-right' do %>
+      <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
+    <% end %>
+  </div>
+  <div class="panel-body">
+    <%= form_for(@contact) do |f| %>
+      <% if @contact.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
 
-      <ul>
-      <% @contact.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @contact.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="form-group">
-    <%= f.label :name, 'Nombre', class: 'control-label col-sm-3' %>
-    <div class="col-sm-9">
-      <%= f.text_field :name, class: 'form-control', placeholder: 'Nombre y apellido', required: true %>
-    </div>
+      <div class="form-group">
+        <%= f.label :name, 'Nombre', class: 'control-label col-sm-3' %>
+        <div class="col-sm-9">
+          <%= f.text_field :name, class: 'form-control', placeholder: 'Nombre y apellido', required: true %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, 'Email', class: 'control-label col-sm-3' %>
+        <div class="col-sm-9">
+          <%= f.email_field :email, class: 'form-control', placeholder: 'Email', required: true %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :tel, 'Teléfono', class: 'control-label col-sm-3' %>
+        <div class="col-sm-9">
+          <%= f.text_field :tel, class: 'form-control', placeholder: 'Teléfono' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :role, 'Típo de usuario', class: 'control-label col-sm-3' %>
+        <div class="col-sm-9">
+          <%= f.select :role, [ ['Visitante', :client], ['Comerciante', :seller] ], { include_blank: 'Seleccioná' }, class: 'form-control', required: true %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :message, 'Mensaje', class: 'control-label col-sm-3' %>
+        <div class="col-sm-9">
+          <%= f.text_area :message, class: 'form-control', placeholder: 'Mensaje', rows: 4, required: true, minlength: 15 %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+          <%= f.submit class: 'btn btn-default' %>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div class="form-group">
-    <%= f.label :email, 'Email', class: 'control-label col-sm-3' %>
-    <div class="col-sm-9">
-      <%= f.email_field :email, class: 'form-control', placeholder: 'Email', required: true %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :tel, 'Teléfono', class: 'control-label col-sm-3' %>
-    <div class="col-sm-9">
-      <%= f.text_field :tel, class: 'form-control', placeholder: 'Teléfono' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :role, 'Típo de usuario', class: 'control-label col-sm-3' %>
-    <div class="col-sm-9">
-      <%= f.select :role, [ ['Visitante', :client], ['Comerciante', :seller] ], { include_blank: 'Seleccioná' }, class: 'form-control', required: true %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :message, 'Mensaje', class: 'control-label col-sm-3' %>
-    <div class="col-sm-9">
-      <%= f.text_area :message, class: 'form-control', placeholder: 'Mensaje', rows: 4, required: true, minlength: 15 %>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-9 col-sm-offset-3">
-      <%= f.submit class: 'btn btn-default' %>
-    </div>
-  </div>
-<% end %>
+</div>

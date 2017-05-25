@@ -9,6 +9,9 @@
 				<%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_shop_path(@shop), class: 'btn btn-xs btn-info' %>
 				<%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, @shop, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %>
 				<strong>Puesto Nº <%= @shop.number_id %> <small><%= @shop.description %></small></strong>
+        <%= link_to shops_path, class: 'btn btn-xs btn-warning pull-right' do %>
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> Volver
+        <% end %>
 			</div>
 			<div class="panel-body">
 				<div class="pull-right">
