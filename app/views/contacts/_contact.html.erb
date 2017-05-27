@@ -1,0 +1,21 @@
+<% selected = false unless local_assigns.has_key? :selected %>
+
+<tr class="<%= 'active' unless contact.read %>" data-member-id="<%= contact.id %>">
+	<td>
+		<label class="checkbox-inline">
+			<input class="collection-methods" type="checkbox" name="contact[ids][]" id="contact_id_<%= contact.id %>" value="<%= contact.id %>" <%= 'checked' if selected %>>
+		</label>
+	</td>
+	<td><%= contact.name %></td>
+	<td><%= contact.email %></td>
+	<td><%= contact.tel %></td>
+	<td><%= { client: 'Visitante', seller: 'Comerciante' }[contact.role.try(:to_sym)] %></td>
+	<td><%= { contact: 'Contacto' }[contact.subject.try(:to_sym)] %></td>
+	<td>
+		<div class="btn-group btn-group-xs" role="group" aria-label="...">
+			<%= link_to '<i class="fa fa-eye" aria-hidden="true"></i>'.html_safe, contact, class: 'btn btn-default' %>
+			<%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_contact_path(contact), class: 'btn btn-info' %>
+			<%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+		</div>
+	</td>
+</tr>

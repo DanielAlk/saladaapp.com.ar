@@ -74,6 +74,30 @@ class ContactsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /contacts.js
+  def update_many
+    begin
+      Contact.put(:many, contact_params.merge({ ids: params[:ids] }))
+    rescue
+      @contacts_errors = ['Unable to update selected contacts']
+    end
+    @contacts = Contact.all(params: { f: { select: params[:ids] }.to_json })
+    render :index
+  end
+
+  # DELETE /contacts.js
+  def destroy_many
+    param_ids = { ids: params[:ids] }
+    begin
+      Contact.delete(:many, param_ids)
+      render js: 'window.location.reload()'
+    rescue
+      @contacts = Contact.all(params: { f: { select: params[:ids] }.to_json })
+      @contacts_errors = ['Unable to delete selected contacts']
+      render :index
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact

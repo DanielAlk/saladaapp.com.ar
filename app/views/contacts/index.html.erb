@@ -1,5 +1,6 @@
 <% content_for :extra_js do %>
   Utils.filtersForm();
+  Utils.checkboxes();
 <% end %>
 
 <div class="row">
@@ -45,6 +46,11 @@
         <thead>
           <tr>
             <th>
+              <label class="checkbox-inline">
+                <input type="checkbox" name="select_all" data-target=".collection-methods">
+              </label>
+            </th>
+            <th>
               <a href="#" data-order="name">
                 Nombre
                 <small>
@@ -84,27 +90,32 @@
                 </small>
               </a>
             </th>
-            <th></th>
+            <th class="text-right">
+              <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                <%= form_for contacts_path, method: :put, format: :js, remote: true, html: { class: 'collection-methods' } do |f| %>
+                  <%= hidden_field_tag 'contact[read]', 1 %>
+                  <%= f.button type: :submit, class: 'btn btn-default', disabled: true do %>
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  <% end %>
+                <% end %>
+                <%= form_for contacts_path, method: :put, format: :js, remote: true, html: { class: 'collection-methods' } do |f| %>
+                  <%= hidden_field_tag 'contact[read]', 0 %>
+                  <%= f.button type: :submit, class: 'btn btn-warning', disabled: true do %>
+                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                  <% end %>
+                <% end %>
+                <%= form_for contacts_path, method: :delete, format: :js, remote: true, data: { confirm: 'Are you sure?' }, html: { class: 'collection-methods' } do |f| %>
+                  <%= f.button type: :submit, class: 'btn btn-danger', disabled: true do %>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  <% end %>
+                <% end %>
+              </div>
+            </th>
           </tr>
         </thead>
 
         <tbody>
-          <% @contacts.each do |contact| %>
-            <tr class="<%= 'active' unless contact.read %>">
-              <td><%= contact.name %></td>
-              <td><%= contact.email %></td>
-              <td><%= contact.tel %></td>
-              <td><%= { client: 'Visitante', seller: 'Comerciante' }[contact.role.try(:to_sym)] %></td>
-              <td><%= { contact: 'Contacto' }[contact.subject.try(:to_sym)] %></td>
-              <td>
-                <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                  <%= link_to '<i class="fa fa-eye" aria-hidden="true"></i>'.html_safe, contact, class: 'btn btn-default' %>
-                  <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_contact_path(contact), class: 'btn btn-info' %>
-                  <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, contact, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-                </div>
-              </td>
-            </tr>
-          <% end %>
+          <%= render @contacts %>
         </tbody>
       </table>
     <% end %>

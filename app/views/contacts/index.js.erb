@@ -1,0 +1,11 @@
+var contact_error = '<%= @contacts_errors[0] rescue nil %>';
+var $contacts = $('<%= j render @contacts, selected: true %>');
+var $tr = $('tbody tr');
+$contacts.each(function() {
+	var $contact = $(this);
+	var id = $contact.data('member-id');
+	$tr.filter('[data-member-id=' + id + ']').replaceWith($contact);
+});
+if (!!contact_error) Utils.notification('alert', contact_error);
+Utils.checkboxes();
+Utils.loader().hide();

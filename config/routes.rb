@@ -6,7 +6,12 @@ Rails.application.routes.draw do
     resources :shops
     resources :payments
     resources :users
-    resources :contacts, except: :create
+    resources :contacts, except: :create do
+      collection do
+        put '/', action: :update_many, format: :js
+        delete '/', action: :destroy_many, format: :js
+      end
+    end
   end
 
   root 'pages#home'
