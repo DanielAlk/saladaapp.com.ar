@@ -81,7 +81,7 @@ class ContactsController < ApplicationController
     rescue
       @contacts_errors = ['Unable to update selected contacts']
     end
-    @contacts = Contact.all(params: { f: { select: params[:ids] }.to_json })
+    @contacts = Contact.all(params: { f: { find: params[:ids] }.to_json })
     render :index
   end
 
@@ -92,7 +92,7 @@ class ContactsController < ApplicationController
       Contact.delete(:many, param_ids)
       render js: 'window.location.reload()'
     rescue
-      @contacts = Contact.all(params: { f: { select: params[:ids] }.to_json })
+      @contacts = Contact.all(params: { f: { find: params[:ids] }.to_json })
       @contacts_errors = ['Unable to delete selected contacts']
       render :index
     end

@@ -1,5 +1,6 @@
 class User < ActiveResource::Base
   self.site = ENV['api_url']
+  add_response_method :http_response
 
   has_many :shops
 

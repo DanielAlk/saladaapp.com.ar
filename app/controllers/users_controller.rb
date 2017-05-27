@@ -4,7 +4,18 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    resource_params = {}
+    resource_params[:f] = params[:f].to_json if params[:f].present?
+    resource_params[:page] = params[:page].present? ? params[:page] : 1
+    resource_params[:per] = params[:per].present? ? params[:per] : 12
+
+    @users = User.all(params: resource_params)
+
+    @users = Kaminari::PaginatableArray.new(@users,{
+      limit: @users.http_response['X-limit'].to_i,
+      offset: @users.http_response['X-offset'].to_i,
+      total_count: @users.http_response['X-total'].to_i
+    })
   end
 
   # GET /users/1

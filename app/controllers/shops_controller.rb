@@ -19,7 +19,7 @@ class ShopsController < ApplicationController
 
     @categories = Category.all
     @sheds = Shed.all
-    @users = User.all(params: { f: { scopes: { role: :seller } } })
+    @users = User.all(params: { f: { scopes: { role: :seller }, select: [:id, :name] }.to_json })
   end
 
   # GET /shops/1
@@ -86,7 +86,7 @@ class ShopsController < ApplicationController
     rescue
       @shops_errors = ['Unable to update selected shops']
     end
-    @shops = Shop.all(params: { f: { select: params[:ids] }.to_json })
+    @shops = Shop.all(params: { f: { find: params[:ids] }.to_json })
     render :index
   end
 
@@ -97,7 +97,7 @@ class ShopsController < ApplicationController
       Shop.delete(:many, param_ids)
       render js: 'window.location.reload()'
     rescue
-      @shops = Shop.all(params: { f: { select: params[:ids] }.to_json })
+      @shops = Shop.all(params: { f: { find: params[:ids] }.to_json })
       @shops_errors = ['Unable to delete selected shops']
       render :index
     end

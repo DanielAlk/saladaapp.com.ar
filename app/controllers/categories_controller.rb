@@ -4,7 +4,18 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    resource_params = {}
+    resource_params[:f] = params[:f].to_json if params[:f].present?
+    resource_params[:page] = params[:page].present? ? params[:page] : 1
+    resource_params[:per] = params[:per].present? ? params[:per] : 12
+
+    @categories = Category.all(params: resource_params)
+
+    @categories = Kaminari::PaginatableArray.new(@categories,{
+      limit: @categories.http_response['X-limit'].to_i,
+      offset: @categories.http_response['X-offset'].to_i,
+      total_count: @categories.http_response['X-total'].to_i
+    })
   end
 
   # GET /categories/1
@@ -68,7 +79,7 @@ class CategoriesController < ApplicationController
     rescue
       @categories_errors = ['Unable to update selected categories']
     end
-    @categories = Category.all(params: { f: { select: params[:ids] }.to_json })
+    @categories = Category.all(params: { f: { find: params[:ids] }.to_json })
     render :index
   end
 
@@ -79,7 +90,7 @@ class CategoriesController < ApplicationController
       Category.delete(:many, param_ids)
       render js: 'window.location.reload()'
     rescue
-      @categories = Category.all(params: { f: { select: params[:ids] }.to_json })
+      @categories = Category.all(params: { f: { find: params[:ids] }.to_json })
       @categories_errors = ['Unable to delete selected categories']
       render :index
     end
