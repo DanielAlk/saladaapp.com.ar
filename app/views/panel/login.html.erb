@@ -11,6 +11,7 @@
 				</div>
 				<div class="panel-body">
 					<%= form_tag '#', class: 'authenticate', id: 'formLogin' do %>
+						<input type="hidden" id="after_login_url" value="<%= panel_path %>">
 						<fieldset>
 							<div class="form-group">
 								<input type="email" class="form-control" id="user_email" name="user[email]" placeholder="Email" required autofocus>
