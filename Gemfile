@@ -35,9 +35,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'activeresource'
 gem "activeresource-response"
 
-gem 'redis', '~>3.2'
-gem 'hiredis', '~> 0.6.0'
-
 gem 'figaro'
 gem 'sucker_punch'
 gem 'autonumeric-rails'
