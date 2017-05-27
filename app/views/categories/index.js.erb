@@ -1,0 +1,11 @@
+var category_error = '<%= @categories_errors[0] rescue nil %>';
+var $categories = $('<%= j render @categories, selected: true %>');
+var $tr = $('tbody tr');
+$categories.each(function() {
+	var $category = $(this);
+	var id = $category.data('member-id');
+	$tr.filter('[data-member-id=' + id + ']').replaceWith($category);
+});
+if (!!category_error) Utils.notification('alert', category_error);
+Utils.checkboxes();
+Utils.loader().hide();

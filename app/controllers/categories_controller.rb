@@ -61,6 +61,30 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # PATCH/PUT /categories.js
+  def update_many
+    begin
+      Category.put(:many, category_params.merge({ ids: params[:ids] }))
+    rescue
+      @categories_errors = ['Unable to update selected categories']
+    end
+    @categories = Category.all(params: { f: { select: params[:ids] }.to_json })
+    render :index
+  end
+
+  # DELETE /categories.js
+  def destroy_many
+    param_ids = { ids: params[:ids] }
+    begin
+      Category.delete(:many, param_ids)
+      render js: 'window.location.reload()'
+    rescue
+      @categories = Category.all(params: { f: { select: params[:ids] }.to_json })
+      @categories_errors = ['Unable to delete selected categories']
+      render :index
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
