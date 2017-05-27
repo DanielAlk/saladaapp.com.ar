@@ -3,6 +3,7 @@ var Utils = {};
 Utils.init = function() {
 	if ($('body>div#wrapper').length) {
 		Utils.start_bs_admin();
+		Utils.collectionMethods();
 	} else {
 		Utils.mobileNav();
 		Utils.scrollHash();
@@ -13,6 +14,22 @@ Utils.init = function() {
 		});
 	};
 	Utils.checkboxes.init();
+};
+
+Utils.collectionMethods = function() {
+	$(document).on('submit', 'form.collection-methods', Utils.loader);
+	$(document).on('change', 'input[type=checkbox].collection-methods', function(e) {
+		var $checked = $('input[type=checkbox].collection-methods:checked');
+		$('form.collection-methods :submit').prop('disabled', !$checked.length);
+		$('form.collection-methods').each(function() {
+			var $form = $(this);
+			var $fieldset = $form.find('span').length ? $form.find('span') : $('<span>').appendTo($form);
+			$fieldset.html(null);
+			$checked.each(function() {
+				$('<input>', { type: 'hidden', name: 'ids[]', value: $(this).val() }).appendTo($fieldset);
+			});
+		});
+	});
 };
 
 Utils.media = function(device, callback) {

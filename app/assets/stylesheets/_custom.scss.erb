@@ -61,3 +61,15 @@ label.error { position: absolute; right: 20px; margin: 0 15px; text-align: right
 	&:before { content: ' '; display: inline-block; position: absolute; left: 0; top: 0; width: 12px; height: 12px; background-color: #FFF; border: 1px solid #000; }
 	&.active:after { content: ' '; display: inline-block; position: absolute; left: 3px; top: 3px; width: 6px; height: 6px; background-color: #000000; }
 }
+
+.btn-xs, .btn-group-xs > form .btn { padding: 1px 5px; font-size: 12px; line-height: 1.5; border-radius: 3px; }
+.btn-group, .btn-group-vertical {
+	&> form { display: inline;
+		.btn { position: relative; float: left; }
+		&:first-child .btn { margin-left: 0; }
+		&:first-child:not(:last-child) .btn { border-bottom-right-radius: 0; border-top-right-radius: 0; }
+		&:last-child:not(:first-child) .btn { border-bottom-left-radius: 0; border-top-left-radius: 0; }
+		&:not(:first-child):not(:last-child) .btn { border-radius: 0; }
+		& + form .btn, & + .btn { margin-left: -1px; }
+	}
+}
