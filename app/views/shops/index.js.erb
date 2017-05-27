@@ -1,0 +1,11 @@
+var shop_error = '<%= @shops_errors[0] rescue nil %>';
+var $shops = $('<%= j render @shops, selected: true %>');
+var $tr = $('tbody tr');
+$shops.each(function() {
+	var $shop = $(this);
+	var id = $shop.data('member-id');
+	$tr.filter('[data-member-id=' + id + ']').replaceWith($shop);
+});
+if (!!shop_error) Utils.notification('alert', shop_error);
+Utils.checkboxes();
+Utils.loader().hide();

@@ -3,10 +3,15 @@ Rails.application.routes.draw do
     get '/', to: 'panel#home', as: :panel
     get '/login', to: 'panel#login', as: :panel_login
 
-    resources :shops
     resources :payments
     resources :users
 
+    resources :shops do
+      collection do
+        put '/', action: :update_many, format: :js
+        delete '/', action: :destroy_many, format: :js
+      end
+    end
     resources :categories do
       collection do
         put '/', action: :update_many, format: :js

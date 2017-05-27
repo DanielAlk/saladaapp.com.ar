@@ -1,5 +1,6 @@
 <% content_for :extra_js do %>
   Utils.filtersForm();
+  Utils.checkboxes();
 <% end %>
 
 <div class="row">
@@ -55,6 +56,11 @@
         <thead>
           <tr>
             <th>
+              <label class="checkbox-inline">
+                <input type="checkbox" name="select_all" data-target=".collection-methods">
+              </label>
+            </th>
+            <th>
               <a href="#" data-order="number_id">
                 Nº Puesto
                 <small>
@@ -86,26 +92,20 @@
                 </small>
               </a>
             </th>
-            <th></th>
+            <th class="text-right">
+              <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                <%= form_for shops_path, method: :delete, format: :js, remote: true, data: { confirm: 'Are you sure?' }, html: { class: 'collection-methods' } do |f| %>
+                  <%= f.button type: :submit, class: 'btn btn-danger', disabled: true do %>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  <% end %>
+                <% end %>
+              </div>
+            </th>
           </tr>
         </thead>
 
         <tbody>
-          <% @shops.each do |shop| %>
-            <tr>
-              <td><%= shop.number_id %></td>
-              <td><%= shop.user_name %></td>
-              <td><%= shop.shed_title %></td>
-              <td><%= shop.description %></td>
-              <td>
-                <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                  <%= link_to '<i class="fa fa-eye" aria-hidden="true"></i>'.html_safe, shop, class: 'btn btn-default' %>
-                  <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_shop_path(shop), class: 'btn btn-info' %>
-                  <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i>'.html_safe, shop, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-                </div>
-              </td>
-            </tr>
-          <% end %>
+          <%= render @shops %>
         </tbody>
       </table>
     <% end %>

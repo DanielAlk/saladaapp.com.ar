@@ -7,6 +7,7 @@ class ShopsController < ApplicationController
     resource_params = {}
     resource_params[:f] = params[:f].to_json if params[:f].present?
     resource_params[:page] = params[:page].present? ? params[:page] : 1
+    resource_params[:per] = params[:per].present? ? params[:per] : 12
 
     @shops = Shop.all(params: resource_params)
 
@@ -75,6 +76,30 @@ class ShopsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to shops_url, notice: 'Shop was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # PATCH/PUT /shops.js
+  def update_many
+    begin
+      Shop.put(:many, shop_params.merge({ ids: params[:ids] }))
+    rescue
+      @shops_errors = ['Unable to update selected shops']
+    end
+    @shops = Shop.all(params: { f: { select: params[:ids] }.to_json })
+    render :index
+  end
+
+  # DELETE /shops.js
+  def destroy_many
+    param_ids = { ids: params[:ids] }
+    begin
+      Shop.delete(:many, param_ids)
+      render js: 'window.location.reload()'
+    rescue
+      @shops = Shop.all(params: { f: { select: params[:ids] }.to_json })
+      @shops_errors = ['Unable to delete selected shops']
+      render :index
     end
   end
 
