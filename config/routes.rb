@@ -1,30 +1,30 @@
 Rails.application.routes.draw do
-  constraints subdomain: /panel/ do
-    get '/', to: 'panel#home', as: :panel
-    get '/login', to: 'panel#login', as: :panel_login
+  #constraints subdomain: /panel/ do
+  #  get '/', to: 'panel#home', as: :panel
+  #  get '/login', to: 'panel#login', as: :panel_login
 
-    resources :payments
-    resources :users
+  #  resources :payments
+  #  resources :users
 
-    resources :shops do
-      collection do
-        put '/', action: :update_many, format: :js
-        delete '/', action: :destroy_many, format: :js
-      end
-    end
-    resources :categories do
-      collection do
-        put '/', action: :update_many, format: :js
-        delete '/', action: :destroy_many, format: :js
-      end
-    end
-    resources :contacts, except: :create do
-      collection do
-        put '/', action: :update_many, format: :js
-        delete '/', action: :destroy_many, format: :js
-      end
-    end
-  end
+  #  resources :shops do
+  #    collection do
+  #      put '/', action: :update_many, format: :js
+  #      delete '/', action: :destroy_many, format: :js
+  #    end
+  #  end
+  #  resources :categories do
+  #    collection do
+  #      put '/', action: :update_many, format: :js
+  #      delete '/', action: :destroy_many, format: :js
+  #    end
+  #  end
+  #  resources :contacts, except: :create do
+  #    collection do
+  #      put '/', action: :update_many, format: :js
+  #      delete '/', action: :destroy_many, format: :js
+  #    end
+  #  end
+  #end
 
   root 'pages#home'
   get 'packs/:role', to: 'pages#packs', role: /visitante|comerciante/, as: :packs
