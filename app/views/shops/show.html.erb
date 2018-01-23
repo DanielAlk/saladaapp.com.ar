@@ -51,7 +51,7 @@
 				
 				<p><strong>¿Puesto fijo?</strong> <%= @shop.fixed ? 'Si' : 'No' %></p>
 				<p><strong>Abierto</strong> <%= { '2/4/7' => 'Todas las ferias', '2' => 'Lunes solamente', '4' => 'Miércoles solamente', '7' => 'Sábados solamente', '2/4' => 'Lunes y Miércoles', '4/7' => 'Miércoles y Sábados', '2/7' => 'Lunes y Sábados', '0' => 'No opera' }[@shop.opens] %></p>
-				<p><strong>Estádo</strong> <%= { occupied: 'Ocupado', empty: 'Vacío', repairs: 'En reparación' }[@shop.condition.try(:to_sym)] %></p>
+				<p><strong>Estádo</strong> <%= { occupied: 'Abierto', empty: 'Vacío', repairs: 'En reparación' }[@shop.condition.try(:to_sym)] %></p>
 			</div>
 		</div>
 	</div>

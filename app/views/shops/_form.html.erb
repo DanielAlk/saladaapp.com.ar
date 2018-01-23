@@ -1,38 +1,33 @@
-<% content_for :extra_js do %>
-  $('.new_shop, .edit_shop').validate();
-  changeHandler.call($('.select-control').get(0));
-<% end %>
-
 <script type="text/javascript">
-  console.log(JSON.parse('<%= escape_javascript @shop.to_json.html_safe %>'));
-  var changeHandler = function(e) {
-    var $select = $(this);
-    var val = Number($select.val());
-    var $targets = $('.' + $select.attr('id'));
-    $targets.hide().each(function() {
-      var $target = $(this);
-      var valuesToMatch = $target.data('control-val');
-      if (valuesToMatch.indexOf(val) > -1) $target.show();
-    });
-  };
-  $(document).on('change', '.select-control', changeHandler);
-  $(document).on('submit', '.new_shop, .edit_shop', function(e) {
-    e.preventDefault();
-    var form = this;
-    var $form = $(form);
-    var files = $('#imageFile').get(0).files;
-    var file = files[0];
-    Utils.loader();
-    if (files && file) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        $('<input>', { type: 'hidden', name: 'shop[image]', value: e.target.result }).appendTo($form);
-        $('<input>', { type: 'hidden', name: 'shop[image_file_name]', value: file.name }).appendTo($form);
-        form.submit();
-      };
-      reader.readAsDataURL(file);
-    } else form.submit();
-  });
+  <% content_for :extra_js do %>
+    var changeHandler = function(e) {
+      var $select = $(this);
+      var val = Number($select.val());
+      var $targets = $('.' + $select.attr('id'));
+      $targets.hide().each(function() {
+        var $target = $(this);
+        var valuesToMatch = $target.data('control-val');
+        if (valuesToMatch.indexOf(val) > -1) $target.show();
+      });
+    };
+    var submitForm = function(form) {
+      var $form = $(form);
+      var files = $('#imageFile').get(0).files;
+      var file = files[0];
+      Utils.loader();
+      if (files && file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          $('<input>', { type: 'hidden', name: 'shop[image]', value: e.target.result }).appendTo($form);
+          $('<input>', { type: 'hidden', name: 'shop[image_file_name]', value: file.name }).appendTo($form);
+          form.submit();
+        };
+        reader.readAsDataURL(file);
+      } else form.submit();
+    };
+    $('.select-control').change(changeHandler).change();
+    $('.new_shop, .edit_shop').validate({ submitHandler: submitForm });
+  <% end %>
 </script>
 
 <div class="panel panel-default">
@@ -146,7 +141,7 @@
       <div class="form-group">
         <%= f.label :condition, 'Estado', class: 'control-label col-sm-3' %>
         <div class="col-sm-9">
-          <%= f.select :condition, [ ['Ocupado', :occupied], ['Vacío', :empty], ['En reparación', :repairs] ], { include_blank: 'Estado del puesto' }, class: 'form-control', required: true %>
+          <%= f.select :condition, [ ['Abierto', :occupied], ['Vacío', :empty], ['En reparación', :repairs] ], { include_blank: 'Estado del puesto' }, class: 'form-control', required: true %>
         </div>
       </div>
       <div class="form-group">

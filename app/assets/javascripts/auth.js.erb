@@ -60,7 +60,7 @@ Auth.buttons = function() {
 
 Auth.showHide = function() {
 	$(document).on('turbolinks:load auth.validation.success auth.validation.error', function() {
-		var notification;
+		var notification = $.cookie('notification');
 		if (Auth.signedIn) {
 			$('.auth-hide').hide();
 			$('.auth-show').removeAttr('style');
@@ -68,7 +68,7 @@ Auth.showHide = function() {
 			$('.auth-show').hide();
 			$('.auth-hide').removeAttr('style');
 		};
-		if (notification = $.cookie('notification')) {
+		if (notification) {
 			var n = JSON.parse(notification);
 			$.removeCookie('notification', { path: '/' });
 			Utils.notification(n.class, n.text);

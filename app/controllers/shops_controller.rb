@@ -1,4 +1,5 @@
 class ShopsController < ApplicationController
+  include AuthHeaders
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
   # GET /shops
