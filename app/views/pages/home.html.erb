@@ -1,6 +1,35 @@
 <% content_for :extra_js do %>
 	Utils.radios();
+	var submitted = false;
 	$('#new_contact').validate({
+		submitHandler: function(form) {
+			if (submitted) return;
+			Utils.loader();
+			var params = {};
+			$(form).serializeArray().forEach(function(param) {
+				if (param.name.match('contact')) {
+					var name = param.name.replace(/contact|[\[\]]/g, '');
+					params[name] = param.value;
+				};
+			});
+			$.post('<%= ENV['api_url'] %>/contacts', params, 'json')
+			.done(function(contact) {
+				var response = 'Gracias por contactarte ' + contact.name + ', nos contactaremos a la brevedad.';
+				var form = document.getElementById('new_contact');
+				Utils.insertFormResponse(form, response);
+				Utils.notification('notice', 'Contacto enviado con exito.');
+				Utils.loader().hide();
+				submitted = true;
+			})
+			.fail(function() {
+				var response = 'Ocurrió un error al envíar tu contacto, revisá los datos';
+				Utils.insertFormResponse(document.getElementById('new_contact'), response, 2000);
+				Utils.notification('notice', 'Revisá los datos.');
+				Utils.loader().hide();
+				console.info('Contact Error', arguments);
+			})
+			.always(console.log)
+		},
 		errorPlacement: function(error, element) {
 			if (element.attr('type') == 'radio') error.appendTo(element.closest('div.radio'));
 			else error.insertAfter(element);
@@ -30,10 +59,10 @@
 					<p class="pages-cover-caption-text">LLegó <b>Salada</b>App, una App para recorrer la feria mas grande de latinoamérica</p>
 					<div class="app-try-button">
 						<%= link_to 'Probala grátis ahora', root_path + '#download', class: 'scroll-hash' %>
-						<%= link_to '#' do %>
-							<i class="fa fa-apple" aria-hidden="true"></i>
-						<% end %>
-						<%= link_to '#' do %>
+						<%# link_to '#' do %>
+							<!--i class="fa fa-apple" aria-hidden="true"></i-->
+						<%# end %>
+						<%= link_to 'https://play.google.com/store/apps/details?id=com.ionicframework.saladaapp407126', target: '_blank' do %>
 							<i class="fa fa-android" aria-hidden="true"></i>
 						<% end %>
 					</div>
@@ -192,12 +221,12 @@
 	<div class="container">
 		<h2 class="section-title mb-xs-40">Descargar</h2>
 		<div class="stores">
-			<%= link_to '#' do %>
+			<%= link_to 'https://play.google.com/store/apps/details?id=com.ionicframework.saladaapp407126', target: '_blank' do %>
 				<%= image_tag 'store-android.png' %>
 			<% end %>
-			<%= link_to '#' do %>
-				<%= image_tag 'store-ios.png' %>
-			<% end %>
+			<%# link_to '#' do %>
+				<%# image_tag 'store-ios.png' %>
+			<%# end %>
 		</div>
 	</div>
 </section>

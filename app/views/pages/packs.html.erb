@@ -12,7 +12,7 @@
 				<% pages_packs[@role].each_with_index do |pack, i| %>
 					<div class="col-xs-6 col-md-5 <%= 'col-md-offset-1' if i == 0 %>">
 						<div class="<%= pack[:class] %>">
-							<%= link_to '#' do %>
+							<%= link_to 'https://play.google.com/store/apps/details?id=com.ionicframework.saladaapp407126', target: '_blank' do %>
 								<div class="pack-header">
 									<h4><%= pack[:title] %></h4>
 									<h2><%= pack[:subtitle].html_safe %></h2>
