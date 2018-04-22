@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :retrieve_panel_data
+  #before_action :retrieve_panel_data
   #before_action :authenticate_panel, if: -> { request.subdomain.starts_with?('panel') }
 
   private
