@@ -14,7 +14,7 @@
 			});
 			$.post('<%= ENV['api_url'] %>/contacts', params, 'json')
 			.done(function(contact) {
-				var response = 'Gracias por contactarte ' + contact.name + ', nos contactaremos a la brevedad.';
+				var response = 'Gracias por contactarte ' + contact.name + ', nos comunicaremos a la brevedad.';
 				var form = document.getElementById('new_contact');
 				Utils.insertFormResponse(form, response);
 				Utils.notification('notice', 'Contacto enviado con exito.');
