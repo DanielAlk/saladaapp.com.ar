@@ -16,6 +16,9 @@
 								<div class="pack-header">
 									<h4><%= pack[:title] %></h4>
 									<h2><%= pack[:subtitle].html_safe %></h2>
+									<% if @role.to_sym == :seller %>
+										<h6><%= pack[:promotion].html_safe %></h6>
+									<% end %>
 								</div>
 								<ul class="pack-details">
 									<% pack[:details].each do |detail_name, detail_status| %>

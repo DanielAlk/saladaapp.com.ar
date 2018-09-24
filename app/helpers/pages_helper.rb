@@ -44,6 +44,7 @@ module PagesHelper
 					class: 'pack',
 					title: 'Comerciante Free',
 					subtitle: 'GRATIS',
+					promotion: '&nbsp;',
 					details: {
 						'Crear y editar perfil.': 'Si',
 						'Crear y editar datos de ubicación del puesto.': 'Si',
@@ -62,7 +63,8 @@ module PagesHelper
 				{
 					class: 'pack pack-primary',
 					title: 'Comerciante Premium',
-					subtitle: '$99,99<small>/Mes</small>',
+					subtitle: '$199,99<small>/Mes</small>*',
+					promotion: '<sup>*</sup>Pago anual adelantado en efectivo $1.999,99',
 					details: {
 						'Crear y editar perfil.': 'Si',
 						'Crear y editar datos de ubicación del puesto.': 'Si',
