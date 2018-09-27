@@ -198,6 +198,12 @@ nav.app-nav { float: right; font-size: 12px;
 	&:active { box-shadow: none; }
 	&.article-plus { position: initial; margin-left: 115px; left: initial; bottom: initial; line-height: 50px;
 		@media(max-width: $screen-xs-max) { margin-left: 50px; }
+		&:not(.loading) {
+			span:nth-child(2) { display: none; }
+		}
+		&.loading { line-height: 52px;
+			span:nth-child(1) { display: none; }
+		}
 	}
 }
 
@@ -344,7 +350,7 @@ footer { background-color: #000; padding: 60px 0 0;
 .article-title { margin-top: 0; margin-bottom: 20px; text-transform: uppercase; max-width: 400px;
 	@media(max-width: $screen-xs-max) { font-size: 22px; }
 }
-.article-text { font-weight: 300; margin-bottom: 30px; }
+.article-text { font-weight: 300; margin-bottom: 30px; overflow: hidden; line-height: 2rem; max-height: 4rem; }
 
 .article-detail-image { position: relative; padding: 210px 0 60px; color: #fff;
 	@media(max-width: $screen-xs-max) { padding: 100px 0 40px; }
@@ -362,7 +368,9 @@ footer { background-color: #000; padding: 60px 0 0;
 }
 .article-detail { max-width: 825px; padding-bottom: 50px;
 	&>img { width: 100%; height: auto; }
-	p {font-weight: 300;margin-bottom: 60px;}
+	p {font-weight: 300;margin-bottom: 60px;
+		p {margin-bottom: 10px;}
+	}
 }
 
 .modal-login {

@@ -1,69 +1,42 @@
+<% content_for :extra_js do %>
+	Blog.init('<%= ENV['api_url'] %>');
+<% end %>
+
 <section class="relative bgi-blog cover c-white pt-xs-90 pb-xs-60 ptb-sm-130">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-7 col-xs-offset-5 col-sm-4 col-sm-offset-6">
 				<h1>BLOG</h1>
-				<p>LLegó <b>Salada</b>App, una App para recorrer la feria mas grande de latinoamérica</p>
+				<p>Llegó <b>Salada</b>App, la manera de recorrer la feria más grande de Latinoamérica desde tu dispositivo SmartPhone y Tablet.</p>
 			</div>
 		</div>
 	</div>
 </section>
 <section class="relative bg-light-grey">
 	<div class="container">
-		<article class="article">
-			<%= link_to article_path do %>
-				<div class="article-image">
-					<%= image_tag 'blog-1.jpg' %>
-				</div>
-				<div class="article-container">
-					<div class="article-slap">
-						<span>28</span>
-						<span>Nov.</span>
-					</div>
-					<div class="article-body">
-						<h3 class="article-title">el Galpón urkupiña agregó 4 nuevos locales:</h3>
-						<p class="article-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-						<span class="btn btn-primary">Ver más</span>
-					</div>
-				</div>
-			<% end %>
-		</article>
-		<article class="article">
-			<%= link_to article_path do %>
-				<div class="article-image">
-					<%= image_tag 'blog-2.jpg' %>
-				</div>
-				<div class="article-container">
-					<div class="article-slap">
-						<span>24</span>
-						<span>Nov.</span>
-					</div>
-					<div class="article-body">
-						<h3 class="article-title">punta mogote reubica a todos los vendedores de comida en un área establecida:</h3>
-						<p class="article-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-						<span class="btn btn-primary">Ver más</span>
-					</div>
-				</div>
-			<% end %>
-		</article>
-		<article class="article">
-			<%= link_to article_path do %>
-				<div class="article-image">
-					<%= image_tag 'blog-3.jpg' %>
-				</div>
-				<div class="article-container">
-					<div class="article-slap">
-						<span>10</span>
-						<span>Nov.</span>
-					</div>
-					<div class="article-body">
-						<h3 class="article-title">nuevas promos en el galpón los coreanos para el mes de noviembre:</h3>
-						<p class="article-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</p>
-						<span class="btn btn-primary">Ver más</span>
-					</div>
-				</div>
-			<% end %>
-		</article>
-		<%= link_to '+', '#', class: 'round-btn article-plus' %>
+		<div id="articles"></div>
+		<%= link_to '#', class: 'round-btn article-plus', id: 'getPage' do %>
+			<span>+</span>
+			<span><i class="fa fa-spinner fa-pulse"></i></span>
+		<% end %>
 	</div>
 </section>
+
+<article id="articleTemplate" class="article" style="display:none;">
+	<%= link_to article_path('-') do %>
+		<div class="article-image">
+			<%= image_tag '' %>
+		</div>
+		<div class="article-container">
+			<div class="article-slap">
+				<span></span>
+				<span></span>
+			</div>
+			<div class="article-body">
+				<h3 class="article-title"></h3>
+				<p class="article-text"></p>
+				<span class="btn btn-primary">Ver más</span>
+			</div>
+		</div>
+	<% end %>
+</article>

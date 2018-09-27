@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   get 'packs/:role', to: 'pages#packs', role: /visitante|comerciante/, as: :packs
   get 'blog', to: 'pages#blog', as: :blog
-  get 'article', to: 'pages#article', as: :article
+  get 'article/:id', to: 'pages#article', as: :article
   get 'privacy-policy', to: 'pages#privacy_policy', as: :privacy_policy
   resources :contacts, only: :create
   

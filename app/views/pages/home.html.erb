@@ -56,9 +56,9 @@
 				<div class="pages-cover-home-caption">
 					<%= image_tag 'saladaapp_pages_logo.png' %>
 					<h1 class="pages-cover-caption-title">Todo lo que buscás en un lugar y al alcance de tu mano</h1>
-					<p class="pages-cover-caption-text">LLegó <b>Salada</b>App, una App para recorrer la feria mas grande de latinoamérica</p>
+					<p class="pages-cover-caption-text">Llegó <b>Salada</b>App, la manera de recorrer la feria más grande de Latinoamérica desde tu dispositivo SmartPhone y Tablet.</p>
 					<div class="app-try-button">
-						<%= link_to 'Probala grátis ahora', root_path + '#download', class: 'scroll-hash' %>
+						<%= link_to 'Probala gratis ahora', root_path + '#download', class: 'scroll-hash' %>
 						<%# link_to '#' do %>
 							<!--i class="fa fa-apple" aria-hidden="true"></i-->
 						<%# end %>
@@ -197,10 +197,10 @@
 					</div>
 					<div class="radio">
 					  <label class="radio-inline">
-					  	<%= f.radio_button :role, :seller, required: true, data: { msg: 'Elige una opción' } %> Soy comerciante
+					  	<%= f.radio_button :role, :client, required: true, data: { msg: 'Elige una opción' } %> Soy visitante
 					  </label>
 					  <label class="radio-inline">
-					  	<%= f.radio_button :role, :client, required: true %> Soy visitante
+					  	<%= f.radio_button :role, :seller, required: true %> Soy comerciante
 					  </label>
 					</div>
 					<div class="form-group">
