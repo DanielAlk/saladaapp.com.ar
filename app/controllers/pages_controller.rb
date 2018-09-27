@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-	layout 'pages'
+	layout :set_layout
 	
 	def home
 	end
@@ -14,4 +14,16 @@ class PagesController < ApplicationController
 
 	def article
 	end
+
+	def privacy_policy
+	end
+
+	private
+		def set_layout
+			if action_name.to_sym == :privacy_policy
+				'privacy_policy'
+			else
+				'pages'
+			end
+		end
 end
