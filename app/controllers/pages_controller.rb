@@ -15,6 +15,17 @@ class PagesController < ApplicationController
 	def article
 	end
 
+	def reset_password
+		if params[:client_id]
+			cookies[:reset_password] = {
+				value: JSON.generate(params.permit(:client_id, :token, :uid)),
+				expires: Time.now + 1.minute
+			}
+		elsif cookies[:reset_password].blank?
+			redirect_to root_url
+		end
+	end
+
 	def privacy_policy
 	end
 

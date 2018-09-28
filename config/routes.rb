@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get 'blog', to: 'pages#blog', as: :blog
   get 'article/:id', to: 'pages#article', as: :article
   get 'privacy-policy', to: 'pages#privacy_policy', as: :privacy_policy
+  get 'reset-password', to: 'pages#reset_password', as: :reset_password
   resources :contacts, only: :create
   
   # The priority is based upon order of creation: first created -> highest priority.
