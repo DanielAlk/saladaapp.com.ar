@@ -134,6 +134,13 @@ nav.app-nav { float: right; font-size: 12px;
 	}
 }
 
+li.social-media { font-size: 1.4em; vertical-align: middle;
+	&>a {
+		text-decoration: none !important;
+		&:not(:first-child):not(:last-child) { margin: 0 5px; }
+	}
+}
+
 @media(max-width: $screen-xs-max) {
 	.pages-wrapper { @include transition(right, 200ms, ease-in); position: relative; right: 0; background-color: #FFF; }
 	body { background-color: #ff983c;

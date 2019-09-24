@@ -29,6 +29,9 @@ class PagesController < ApplicationController
 	def privacy_policy
 	end
 
+	def terms_and_conditions
+	end
+
 	private
 		def set_layout
 			if action_name.to_sym == :privacy_policy

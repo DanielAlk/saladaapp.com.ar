@@ -2,7 +2,19 @@
 	<li><%= link_to 'PACKS', root_path + '#packs', class: 'scroll-hash' %></li>
 	<li><%= link_to 'DESCARGAR', root_path + '#download', class: 'scroll-hash' %></li>
 	<li><%= link_to 'BLOG', blog_path %></li>
+	<li><%= link_to 'TÉRMINOS Y CONDICIONES', terms_and_conditions_path %></li>
 	<li><%= link_to 'CONTACTO', root_path + '#contact', class: 'scroll-hash' %></li>
+	<li class="social-media">
+		<%= link_to 'https://www.facebook.com/SaladaApp-2213308965591500/', target: '_blank' do %>
+			<i class="fa fa-facebook-square"></i>
+		<% end %>
+		<%= link_to 'https://www.instagram.com/saladaapp/', target: '_blank' do %>
+			<i class="fa fa-instagram"></i>
+		<% end %>
+		<%= link_to 'https://api.whatsapp.com/send?phone=5491134482777', target: '_blank' do %>
+			<i class="fa fa-whatsapp"></i>
+		<% end %>
+	</li>
 	<!--
 		<li class="auth-hide"><%= link_to 'REGISTRATE', '#' %></li>
 		<li class="auth-hide"><%= link_to 'INICIAR SESIÓN', '#', data: { toggle: 'modal', target: '#modalLogin' } %></li>

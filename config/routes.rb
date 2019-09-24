@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'packs/:role', to: 'pages#packs', role: /visitante|comerciante/, as: :packs
   get 'blog', to: 'pages#blog', as: :blog
   get 'article/:id', to: 'pages#article', as: :article
+  get 'terms-and-conditions', to: 'pages#terms_and_conditions', as: :terms_and_conditions
   get 'privacy-policy', to: 'pages#privacy_policy', as: :privacy_policy
   get 'reset-password', to: 'pages#reset_password', as: :reset_password
   resources :contacts, only: :create

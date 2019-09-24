@@ -1,0 +1,10 @@
+<% content_for :extra_js do %>
+	TermsAndConditions.init('<%= ENV['api_url'] %>');
+<% end %>
+
+<section class="relative bgi-blog cover c-white" style="padding:0; height:70px;"></section>
+<section class="relative bg-light-grey">
+	<div class="container">
+		<div id="terms-and-conditions"></div>
+	</div>
+</section>
