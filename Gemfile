@@ -41,7 +41,7 @@ gem 'autonumeric-rails'
 gem 'tinymce-rails'
 gem 'kaminari'
 
-gem 'bootstrap-sass', '3.2.0.0'
+gem 'bootstrap-sass', '3.4.1'
 gem 'font-awesome-sass'
 gem 'bootstrap-datepicker-rails'
 
